@@ -46,9 +46,9 @@ public:
 	~PhysVehicle3D();
 
 	void Render();
-	void ApplyEngineForce(float force);
+	void ApplyRightEngineForce(float force);
+	void ApplyLeftEngineForce(float force);
 	void Brake(float force);
-	void Turn(float degrees);
 	float GetKmh() const;
 public:
 

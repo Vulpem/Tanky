@@ -23,14 +23,15 @@ PhysVehicle3D::~PhysVehicle3D()
 // ----------------------------------------------------------------------------
 void PhysVehicle3D::Render()
 {
+
 	Cylinder wheel;
 
 	wheel.color = Blue;
 
 	for(int i = 0; i < vehicle->getNumWheels(); ++i)
 	{
-		wheel.radius = info.wheels[0].radius;
-		wheel.height = info.wheels[0].width;
+		wheel.radius = info.wheels[i].radius;
+		wheel.height = info.wheels[i].width;
 
 		vehicle->updateWheelTransform(i);
 		vehicle->getWheelInfo(i).m_worldTransform.getOpenGLMatrix(&wheel.transform);
@@ -53,9 +54,9 @@ void PhysVehicle3D::Render()
 }
 
 // ----------------------------------------------------------------------------
-void PhysVehicle3D::ApplyEngineForce(float force)
+void PhysVehicle3D::ApplyLeftEngineForce(float force)
 {
-	for(int i = 0; i < vehicle->getNumWheels(); ++i)
+	for(int i = 0; i < vehicle->getNumWheels() / 2; ++i)
 	{
 		if(info.wheels[i].drive == true)
 		{
@@ -63,6 +64,18 @@ void PhysVehicle3D::ApplyEngineForce(float force)
 		}
 	}
 }
+
+void PhysVehicle3D::ApplyRightEngineForce(float force)
+{
+	for (int i = vehicle->getNumWheels() / 2; i < vehicle->getNumWheels(); ++i)
+	{
+		if (info.wheels[i].drive == true)
+		{
+			vehicle->applyEngineForce(force, i);
+		}
+	}
+}
+
 
 // ----------------------------------------------------------------------------
 void PhysVehicle3D::Brake(float force)
@@ -77,7 +90,7 @@ void PhysVehicle3D::Brake(float force)
 }
 
 // ----------------------------------------------------------------------------
-void PhysVehicle3D::Turn(float degrees)
+/*void PhysVehicle3D::Turn(float degrees)
 {
 	for(int i = 0; i < vehicle->getNumWheels(); ++i)
 	{
@@ -86,7 +99,7 @@ void PhysVehicle3D::Turn(float degrees)
 			vehicle->setSteeringValue(degrees, i);
 		}
 	}
-}
+}*/
 
 // ----------------------------------------------------------------------------
 float PhysVehicle3D::GetKmh() const

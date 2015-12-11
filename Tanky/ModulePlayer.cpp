@@ -7,7 +7,7 @@
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
-	turn = acceleration = brake = 0.0f;
+	turn = rightAcceleration = leftAcceleration = brake = 0.0f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -24,16 +24,17 @@ bool ModulePlayer::Start()
 	car.chassis_size.Set(4, 1.5f, 7);
 	car.chassis_offset.Set(0, 1.5f, 0);
 	car.mass = 1000.0f;
-	car.suspensionStiffness = 15.88f;
+	car.suspensionStiffness = 10; //15.88f;
 	car.suspensionCompression = 0.83f;
 	car.suspensionDamping = 0.88f;
 	car.maxSuspensionTravelCm = 1000.0f;
-	car.frictionSlip = 50.5;
+	car.frictionSlip = 1000;//50.5;
 	car.maxSuspensionForce = 6000.0f;
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 1.2f;
-	float wheel_radius = 0.6f;
+	float wheel_radius = 0.4f;
+	float motor_radius = 0.5f;
 	float wheel_width = 0.5f;
 	float suspensionRestLength = 1.2f;
 
@@ -45,104 +46,92 @@ bool ModulePlayer::Start()
 	vec3 direction(0,-1,0);
 	vec3 axis(-1,0,0);
 	
-	car.num_wheels = 8;
-	car.wheels = new Wheel[8];
+	car.num_wheels = 14;
+	car.wheels = new Wheel[14];
+
+	float leftSide = half_width - 0.3f * wheel_width;
+	float rightSide = -half_width + 0.3f * wheel_width;
+	float motor = connection_height + 0.45f;
+	float normal = connection_height;
+	float dist = (half_length / 3);
 
 	// LEFT FRONT------------------------
-	car.wheels[0].connection.Set(half_width - 0.3f * wheel_width, connection_height, half_length - wheel_radius);
+	car.wheels[0].connection.Set(leftSide, motor, dist*-3);
 	car.wheels[0].direction = direction;
 	car.wheels[0].axis = axis;
 	car.wheels[0].suspensionRestLength = suspensionRestLength;
-	car.wheels[0].radius = wheel_radius;
+	car.wheels[0].radius = motor_radius;
 	car.wheels[0].width = wheel_width;
 	car.wheels[0].front = true;
 	car.wheels[0].drive = true;
-	car.wheels[0].brake = false;
+	car.wheels[0].brake = true;
 	car.wheels[0].steering = false;
 
-	// LEFT 2 ------------------------
-	car.wheels[1].connection.Set(half_width - 0.3f * wheel_width, connection_height, half_length/2 - wheel_radius);
-	car.wheels[1].direction = direction;
-	car.wheels[1].axis = axis;
-	car.wheels[1].suspensionRestLength = suspensionRestLength;
-	car.wheels[1].radius = wheel_radius;
-	car.wheels[1].width = wheel_width;
-	car.wheels[1].front = true;
-	car.wheels[1].drive = true;
-	car.wheels[1].brake = false;
-	car.wheels[1].steering = false;
-
-	// LEFT 3 ------------------------
-	car.wheels[2].connection.Set(half_width - 0.3f * wheel_width, connection_height, -half_length/2 + wheel_radius);
-	car.wheels[2].direction = direction;
-	car.wheels[2].axis = axis;
-	car.wheels[2].suspensionRestLength = suspensionRestLength;
-	car.wheels[2].radius = wheel_radius;
-	car.wheels[2].width = wheel_width;
-	car.wheels[2].front = true;
-	car.wheels[2].drive = true;
-	car.wheels[2].brake = false;
-	car.wheels[2].steering = false;
+	// LEFT ------------------------
+	for (int n = -2; n <= 2; n++)
+	{
+		car.wheels[n+3].connection.Set(leftSide, normal, dist * n);
+		car.wheels[n+3].direction = direction;
+		car.wheels[n+3].axis = axis;
+		car.wheels[n+3].suspensionRestLength = suspensionRestLength;
+		car.wheels[n+3].radius = wheel_radius;
+		car.wheels[n+3].width = wheel_width;
+		car.wheels[n+3].front = false;
+		car.wheels[n+3].drive = true;
+		car.wheels[n+3].brake = true;
+		car.wheels[n+3].steering = false;
+	}
 
 	// LEFT REAR ------------------------
-	car.wheels[3].connection.Set(half_width - 0.3f * wheel_width, connection_height, -half_length + wheel_radius);
-	car.wheels[3].direction = direction;
-	car.wheels[3].axis = axis;
-	car.wheels[3].suspensionRestLength = suspensionRestLength;
-	car.wheels[3].radius = wheel_radius;
-	car.wheels[3].width = wheel_width;
-	car.wheels[3].front = false;
-	car.wheels[3].drive = false;
-	car.wheels[3].brake = true;
-	car.wheels[3].steering = false;
-
-	// RIGHT FRONT ------------------------
-	car.wheels[4].connection.Set(-half_width + 0.3f * wheel_width, connection_height, half_length - wheel_radius);
-	car.wheels[4].direction = direction;
-	car.wheels[4].axis = axis;
-	car.wheels[4].suspensionRestLength = suspensionRestLength;
-	car.wheels[4].radius = wheel_radius;
-	car.wheels[4].width = wheel_width;
-	car.wheels[4].front = true;
-	car.wheels[4].drive = true;
-	car.wheels[4].brake = false;
-	car.wheels[4].steering = false;
-
-	// RIGHT 2 ------------------------
-	car.wheels[5].connection.Set(-half_width + 0.3f * wheel_width, connection_height, half_length/2 - wheel_radius);
-	car.wheels[5].direction = direction;
-	car.wheels[5].axis = axis;
-	car.wheels[5].suspensionRestLength = suspensionRestLength;
-	car.wheels[5].radius = wheel_radius;
-	car.wheels[5].width = wheel_width;
-	car.wheels[5].front = true;
-	car.wheels[5].drive = true;
-	car.wheels[5].brake = false;
-	car.wheels[5].steering = false;
-
-	// RIGHT 3 ------------------------
-	car.wheels[6].connection.Set(-half_width + 0.3f * wheel_width, connection_height, -half_length/2 + wheel_radius);
+	car.wheels[6].connection.Set(leftSide, motor, dist*3);
 	car.wheels[6].direction = direction;
 	car.wheels[6].axis = axis;
 	car.wheels[6].suspensionRestLength = suspensionRestLength;
-	car.wheels[6].radius = wheel_radius;
+	car.wheels[6].radius = motor_radius;
 	car.wheels[6].width = wheel_width;
 	car.wheels[6].front = true;
 	car.wheels[6].drive = true;
-	car.wheels[6].brake = false;
+	car.wheels[6].brake = true;
 	car.wheels[6].steering = false;
 
-	// RIGHT REAR ------------------------
-	car.wheels[7].connection.Set(-half_width + 0.3f * wheel_width, connection_height, -half_length + wheel_radius);
+	// RIGHT FRONT------------------------
+	car.wheels[7].connection.Set(rightSide, motor, dist*-3);
 	car.wheels[7].direction = direction;
 	car.wheels[7].axis = axis;
 	car.wheels[7].suspensionRestLength = suspensionRestLength;
-	car.wheels[7].radius = wheel_radius;
+	car.wheels[7].radius = motor_radius;
 	car.wheels[7].width = wheel_width;
-	car.wheels[7].front = false;
-	car.wheels[7].drive = false;
+	car.wheels[7].front = true;
+	car.wheels[7].drive = true;
 	car.wheels[7].brake = true;
 	car.wheels[7].steering = false;
+
+	// RIGHT ------------------------
+	for (int n = -2; n <= 2; n++)
+	{
+		car.wheels[n + 10].connection.Set(rightSide, normal, dist * n);
+		car.wheels[n + 10].direction = direction;
+		car.wheels[n + 10].axis = axis;
+		car.wheels[n + 10].suspensionRestLength = suspensionRestLength;
+		car.wheels[n + 10].radius = wheel_radius;
+		car.wheels[n + 10].width = wheel_width;
+		car.wheels[n + 10].front = false;
+		car.wheels[n + 10].drive = true;
+		car.wheels[n + 10].brake = true;
+		car.wheels[n + 10].steering = false;
+	}
+
+	// RIGHT REAR ------------------------
+	car.wheels[13].connection.Set(rightSide, motor, dist * 3);
+	car.wheels[13].direction = direction;
+	car.wheels[13].axis = axis;
+	car.wheels[13].suspensionRestLength = suspensionRestLength;
+	car.wheels[13].radius = motor_radius;
+	car.wheels[13].width = wheel_width;
+	car.wheels[13].front = true;
+	car.wheels[13].drive = true;
+	car.wheels[13].brake = true;
+	car.wheels[13].steering = false;
 
 
 	vehicle = App->physics->AddVehicle(car);
@@ -162,14 +151,26 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
-	turn = acceleration = brake = 0.0f;
+	turn = rightAcceleration = leftAcceleration = brake = 0.0f;
 
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if(App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT)
 	{
-		acceleration = MAX_ACCELERATION;
+		leftAcceleration = MAX_ACCELERATION;
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
+	{
+		leftAcceleration = -MAX_ACCELERATION;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_Y) == KEY_REPEAT)
+	{
+		rightAcceleration = MAX_ACCELERATION;
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_H) == KEY_REPEAT)
+	{
+		rightAcceleration = -MAX_ACCELERATION;
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	/*if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		if(turn < TURN_DEGREES)
 			turn +=  TURN_DEGREES;
@@ -179,15 +180,13 @@ update_status ModulePlayer::Update(float dt)
 	{
 		if(turn > -TURN_DEGREES)
 			turn -= TURN_DEGREES;
-	}
+	}*/
 
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-	{
-		brake = BRAKE_POWER;
-	}
+	if (rightAcceleration)
+		vehicle->ApplyRightEngineForce(rightAcceleration);
+	if (leftAcceleration)
+		vehicle->ApplyLeftEngineForce(leftAcceleration);
 
-	vehicle->ApplyEngineForce(acceleration);
-	vehicle->Turn(turn);
 	vehicle->Brake(brake);
 
 	vehicle->Render();
