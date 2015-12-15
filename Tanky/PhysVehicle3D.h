@@ -48,7 +48,8 @@ public:
 	void Render();
 	void ApplyRightEngineForce(float force);
 	void ApplyLeftEngineForce(float force);
-	void Brake(float force);
+	void RightBrake(float force);
+	void LeftBrake(float force);
 	float GetKmh() const;
 public:
 

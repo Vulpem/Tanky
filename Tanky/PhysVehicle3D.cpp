@@ -78,9 +78,9 @@ void PhysVehicle3D::ApplyRightEngineForce(float force)
 
 
 // ----------------------------------------------------------------------------
-void PhysVehicle3D::Brake(float force)
+void PhysVehicle3D::LeftBrake(float force)
 {
-	for(int i = 0; i < vehicle->getNumWheels(); ++i)
+	for (int i = 0; i < vehicle->getNumWheels() / 2; ++i)
 	{
 		if(info.wheels[i].brake == true)
 		{
@@ -88,6 +88,18 @@ void PhysVehicle3D::Brake(float force)
 		}
 	}
 }
+
+void PhysVehicle3D::RightBrake(float force)
+{
+	for (int i = vehicle->getNumWheels() / 2; i < vehicle->getNumWheels(); ++i)
+	{
+		if (info.wheels[i].brake == true)
+		{
+			vehicle->setBrake(force, i);
+		}
+	}
+}
+
 
 // ----------------------------------------------------------------------------
 /*void PhysVehicle3D::Turn(float degrees)
