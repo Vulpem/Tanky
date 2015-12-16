@@ -80,5 +80,5 @@ bool PhysBody3D::IsSensor() const
 
 bool PhysBody3D::isResting()
 {
-	return body->isActive();
+	return !body->isActive();
 }
