@@ -27,9 +27,9 @@ bool ModulePlayer::Start()
 	car.suspensionStiffness = 10; //15.88f;
 	car.suspensionCompression = 0.83f;
 	car.suspensionDamping = 0.88f;
-	car.maxSuspensionTravelCm = 100.0f;
-	car.frictionSlip = 600;//50.5;
-	car.maxSuspensionForce = 8000.0f;
+	car.maxSuspensionTravelCm = 50.0f;
+	car.frictionSlip = 1;//50.5;
+	car.maxSuspensionForce = 10000.0f;
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 1.2f;
@@ -153,7 +153,7 @@ update_status ModulePlayer::Update(float dt)
 {
 	turn = rightAcceleration = leftAcceleration = brake = 0.0f;
 
-	if(App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT && vehicle->GetKmh() < MAX_SPEED)
 	{
 		if (vehicle->GetLeftWheelSpeed() < 0.0f)
 		{
@@ -165,7 +165,7 @@ update_status ModulePlayer::Update(float dt)
 			vehicle->ApplyLeftEngineForce(MAX_ACCELERATION);
 		}
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
+	else if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT && vehicle->GetKmh() > -MAX_SPEED)
 	{
 		if (vehicle->GetLeftWheelSpeed() > 0.0f)
 		{
@@ -184,7 +184,7 @@ update_status ModulePlayer::Update(float dt)
 	}
 
 
-	if (App->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT && vehicle->GetKmh() < MAX_SPEED)
 	{
 		if (vehicle->GetRightWheelSpeed() < 0.0f)
 		{
@@ -196,7 +196,7 @@ update_status ModulePlayer::Update(float dt)
 			vehicle->ApplyRightEngineForce(MAX_ACCELERATION);
 		}
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT)
+	else if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT && vehicle->GetKmh() > -MAX_SPEED)
 	{
 		if (vehicle->GetRightWheelSpeed() > 0.0f)
 		{

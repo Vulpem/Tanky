@@ -25,18 +25,26 @@ void PhysVehicle3D::Render()
 {
 
 	Cylinder wheel;
+	Cube wheelRadius;
+	Cube joints;
 
+	wheelRadius.color = Green;
 	wheel.color = Blue;
 
 	for(int i = 0; i < vehicle->getNumWheels(); ++i)
-	{
+	{	
 		wheel.radius = info.wheels[i].radius;
 		wheel.height = info.wheels[i].width;
 
+		wheelRadius.size = { info.wheels[i].width+0.1f, info.wheels[i].radius * 2, 0.1f };
+
 		vehicle->updateWheelTransform(i);
 		vehicle->getWheelInfo(i).m_worldTransform.getOpenGLMatrix(&wheel.transform);
+		wheelRadius.transform = wheel.transform;
 
+		wheelRadius.Render();
 		wheel.Render();
+
 	}
 
 	Cube chassis(info.chassis_size.x, info.chassis_size.y, info.chassis_size.z);
@@ -104,7 +112,7 @@ float PhysVehicle3D::GetLeftWheelSpeed()
 {
 	float rotation = 0.0f;
 	int nWheels = 0;
-	for (int i = 0; i < vehicle->getNumWheels() / 2; ++i)
+	for (int i = 1; i < vehicle->getNumWheels() / 2 - 1; ++i)
 	{
 			rotation += vehicle->getWheelInfo(i).m_deltaRotation;
 			nWheels++;
@@ -116,7 +124,7 @@ float PhysVehicle3D::GetRightWheelSpeed()
 {
 	float rotation = 0.0f;
 	int nWheels = 0;
-	for (int i = vehicle->getNumWheels() / 2; i < vehicle->getNumWheels(); ++i)
+	for (int i = vehicle->getNumWheels() / 2+1; i < vehicle->getNumWheels()-1; ++i)
 	{
 		rotation += vehicle->getWheelInfo(i).m_deltaRotation;
 		nWheels++;

@@ -41,8 +41,8 @@ update_status ModuleCamera3D::Update(float dt)
 {
 	btVector3 var;
 	float x, y, z;
-	LookAt({ x, y, z });
 	App->player->vehicle->GetPos(&x, &y, &z);
+	LookAt({ x, y, z });
 
 	float distanceToVehicle = (Position.x - x)*(Position.x - x) + (Position.y - y)*(Position.y - y);
 
