@@ -295,13 +295,13 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(const VehicleInfo& info)
 	comShape->addChildShape(trans, colShape);
 
 	//Turret --------------
-	btSphereShape* turret = new btSphereShape(info.chassis_size.y);
+	btSphereShape* turret = new btSphereShape(info.turret.turretRadius);
 
 	colShape = turret;
 	shapes.add(colShape);
 
 	trans.setIdentity();
-	trans.setOrigin(btVector3(info.chassis_offset.x, info.chassis_offset.y + info.chassis_size.y * 0.5, info.chassis_offset.z));
+	trans.setOrigin(btVector3(info.chassis_offset.x, info.chassis_offset.y + info.chassis_size.y * 0.5, info.chassis_offset.z + info.turret.turretOffset));
 
 	comShape->addChildShape(trans, colShape);
 
@@ -343,7 +343,7 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(const VehicleInfo& info)
 	}
 	// ---------------------
 
-	PhysVehicle3D* pvehicle = new PhysVehicle3D(body, vehicle, info);
+	PhysVehicle3D* pvehicle = new PhysVehicle3D(body, vehicle,/* turret,*/ info);
 	world->addVehicle(vehicle);
 	vehicles.add(pvehicle);
 

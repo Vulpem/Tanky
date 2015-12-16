@@ -10,7 +10,7 @@ VehicleInfo::~VehicleInfo()
 }
 
 // ----------------------------------------------------------------------------
-PhysVehicle3D::PhysVehicle3D(btRigidBody* body, btRaycastVehicle* vehicle, const VehicleInfo& info) : PhysBody3D(body), vehicle(vehicle), info(info)
+PhysVehicle3D::PhysVehicle3D(btRigidBody* body, btRaycastVehicle* vehicle,/* btSphereShape* _turret, */const VehicleInfo& info) : PhysBody3D(body), vehicle(vehicle), info(info)//, turret(_turret)
 {
 }
 
@@ -23,7 +23,7 @@ PhysVehicle3D::~PhysVehicle3D()
 // ----------------------------------------------------------------------------
 void PhysVehicle3D::Render()
 {
-
+	//Wheels render
 	Cylinder wheel;
 	Cube wheelRadius;
 	Cube joints;
@@ -47,6 +47,7 @@ void PhysVehicle3D::Render()
 
 	}
 
+	//Chassis render
 	Cube chassis(info.chassis_size.x, info.chassis_size.y, info.chassis_size.z);
 	vehicle->getChassisWorldTransform().getOpenGLMatrix(&chassis.transform);
 	btQuaternion q = vehicle->getChassisWorldTransform().getRotation();
@@ -57,8 +58,14 @@ void PhysVehicle3D::Render()
 	chassis.transform.M[13] += offset.getY();
 	chassis.transform.M[14] += offset.getZ();
 
-
 	chassis.Render();
+
+	//turret render
+	Sphere turret;
+	turret.radius = info.turret.turretRadius;
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&turret.transform);
+	
+	turret.Render();
 }
 
 // ----------------------------------------------------------------------------

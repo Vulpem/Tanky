@@ -133,6 +133,11 @@ bool ModulePlayer::Start()
 	car.wheels[13].brake = true;
 	car.wheels[13].steering = false;
 
+	car.turret.turretRadius = car.chassis_size.y;
+	car.turret.turretOffset = -1.5f;
+
+	car.turret.canonLength = 10.0f;
+	car.turret.canonRadius = 0.5f;
 
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 4, 10);

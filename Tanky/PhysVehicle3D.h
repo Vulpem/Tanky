@@ -20,6 +20,16 @@ struct Wheel
 	bool steering; // does this wheel turns ?
 };
 
+struct Turret
+{
+	float turretRadius;
+	int turretOffset;
+
+
+	float canonLength;
+	float canonRadius;
+};
+
 struct VehicleInfo
 {
 	~VehicleInfo();
@@ -36,13 +46,16 @@ struct VehicleInfo
 
 	Wheel* wheels;
 	int num_wheels;
+
+	Turret turret;
+
 };
 
 
 struct PhysVehicle3D : public PhysBody3D
 {
 public:
-	PhysVehicle3D(btRigidBody* body, btRaycastVehicle* vehicle, const VehicleInfo& info);
+	PhysVehicle3D(btRigidBody* body, btRaycastVehicle* vehicle, /*btSphereShape* _turret,*/ const VehicleInfo& info);
 	~PhysVehicle3D();
 
 	void Render();
@@ -63,4 +76,5 @@ public:
 
 	VehicleInfo info;
 	btRaycastVehicle* vehicle;
+	//btSphereShape* turret;
 };
