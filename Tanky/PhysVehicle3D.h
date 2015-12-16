@@ -50,6 +50,9 @@ public:
 	void ApplyLeftEngineForce(float force);
 	void RightBrake(float force);
 	void LeftBrake(float force);
+
+	float GetRightWheelSpeed();
+	float GetLeftWheelSpeed();
 	float GetKmh() const;
 public:
 

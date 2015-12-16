@@ -23,13 +23,13 @@ bool ModulePlayer::Start()
 	// Car properties ----------------------------------------
 	car.chassis_size.Set(4, 1.5f, 7);
 	car.chassis_offset.Set(0, 1.5f, 0);
-	car.mass = 4000.0f;
+	car.mass = 6000.0f;
 	car.suspensionStiffness = 10; //15.88f;
 	car.suspensionCompression = 0.83f;
 	car.suspensionDamping = 0.88f;
 	car.maxSuspensionTravelCm = 100.0f;
-	car.frictionSlip = 1;//50.5;
-	car.maxSuspensionForce = 6000.0f;
+	car.frictionSlip = 600;//50.5;
+	car.maxSuspensionForce = 8000.0f;
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 1.2f;
@@ -135,7 +135,7 @@ bool ModulePlayer::Start()
 
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 12, 10);
+	vehicle->SetPos(0, 4, 10);
 	
 	return true;
 }
@@ -155,28 +155,62 @@ update_status ModulePlayer::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT)
 	{
-		vehicle->ApplyRightEngineForce(MAX_ACCELERATION);
+		if (vehicle->GetLeftWheelSpeed() < 0.0f)
+		{
+			vehicle->ApplyLeftEngineForce(0);
+			vehicle->LeftBrake(BRAKE_POWER);
+		}
+		else
+		{
+			vehicle->ApplyLeftEngineForce(MAX_ACCELERATION);
+		}
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
 	{
-		vehicle->ApplyRightEngineForce(-MAX_ACCELERATION);
-	}
-	else
-	{
-		vehicle->ApplyRightEngineForce(0);
-		vehicle->LeftBrake(BRAKE_POWER);
-	}
-	if (App->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
-	{
-		vehicle->ApplyLeftEngineForce(MAX_ACCELERATION);
-	}
-	else if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT)
-	{
-		vehicle->ApplyLeftEngineForce(-MAX_ACCELERATION);
+		if (vehicle->GetLeftWheelSpeed() > 0.0f)
+		{
+			vehicle->ApplyLeftEngineForce(0);
+			vehicle->LeftBrake(BRAKE_POWER);
+		}
+		else
+		{
+			vehicle->ApplyLeftEngineForce(-MAX_ACCELERATION);
+		}
 	}
 	else
 	{
 		vehicle->ApplyLeftEngineForce(0);
+		vehicle->LeftBrake(BRAKE_POWER);
+	}
+
+
+	if (App->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
+	{
+		if (vehicle->GetRightWheelSpeed() < 0.0f)
+		{
+			vehicle->ApplyRightEngineForce(0);
+			vehicle->RightBrake(BRAKE_POWER);
+		}
+		else
+		{
+			vehicle->ApplyRightEngineForce(MAX_ACCELERATION);
+		}
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT)
+	{
+		if (vehicle->GetRightWheelSpeed() > 0.0f)
+		{
+			vehicle->ApplyRightEngineForce(0);
+			vehicle->RightBrake(BRAKE_POWER);
+		}
+		else
+		{
+			vehicle->ApplyRightEngineForce(-MAX_ACCELERATION);
+		}
+	}
+	else
+	{
+		vehicle->ApplyRightEngineForce(0);
 		vehicle->RightBrake(BRAKE_POWER);
 	}
 

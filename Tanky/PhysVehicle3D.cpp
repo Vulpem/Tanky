@@ -100,6 +100,30 @@ void PhysVehicle3D::RightBrake(float force)
 	}
 }
 
+float PhysVehicle3D::GetLeftWheelSpeed()
+{
+	float rotation = 0.0f;
+	int nWheels = 0;
+	for (int i = 0; i < vehicle->getNumWheels() / 2; ++i)
+	{
+			rotation += vehicle->getWheelInfo(i).m_deltaRotation;
+			nWheels++;
+	}
+	return rotation / nWheels;
+}
+
+float PhysVehicle3D::GetRightWheelSpeed()
+{
+	float rotation = 0.0f;
+	int nWheels = 0;
+	for (int i = vehicle->getNumWheels() / 2; i < vehicle->getNumWheels(); ++i)
+	{
+		rotation += vehicle->getWheelInfo(i).m_deltaRotation;
+		nWheels++;
+	}
+	return rotation / nWheels;
+}
+
 
 // ----------------------------------------------------------------------------
 /*void PhysVehicle3D::Turn(float degrees)
