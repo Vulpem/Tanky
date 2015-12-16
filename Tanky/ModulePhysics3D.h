@@ -32,6 +32,8 @@ public:
 	PhysBody3D* AddBody(const Cylinder& cylinder, float mass = 1.0f);
 	PhysVehicle3D* AddVehicle(const VehicleInfo& info);
 
+	void Shoot(vec3 position, vec3 direction, float force, float radius = 1);
+
 	void AddConstraintP2P(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB);
 	void AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB, const vec3& axisS, const vec3& axisB, bool disable_collision = false);
 

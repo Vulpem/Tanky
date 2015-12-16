@@ -4,6 +4,7 @@
 #include "PhysBody3D.h"
 #include "PhysVehicle3D.h"
 #include "Primitive.h"
+#include "glmath.h"
 
 #ifdef _DEBUG
 	#pragma comment (lib, "Bullet/bin/BulletDynamics_vs2010_debug.lib")
@@ -129,14 +130,19 @@ update_status ModulePhysics3D::Update(float dt)
 
 		if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		{
-			Sphere s(1);
-			s.SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
-			float force = 30.0f;
-			AddBody(s)->Push(-(App->camera->Z.x * force), -(App->camera->Z.y * force), -(App->camera->Z.z * force));
+			Shoot({ App->camera->Position.x, App->camera->Position.y, App->camera->Position.z }, { -(App->camera->Z.x), -(App->camera->Z.y), -(App->camera->Z.z) }, 30.0f, 1.0f);
 		}
 	}
 
 	return UPDATE_CONTINUE;
+}
+
+void ModulePhysics3D::Shoot(vec3 position, vec3 direction, float force, float radius)
+{
+	Sphere s(radius);
+	s.SetPos(position.x, position.y, position.z);
+	direction = direction/sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
+	AddBody(s)->Push(direction.x * force, direction.y * force, direction.z * force);
 }
 
 // ---------------------------------------------------------
