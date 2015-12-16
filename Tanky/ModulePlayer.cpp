@@ -24,12 +24,12 @@ bool ModulePlayer::Start()
 	car.chassis_size.Set(4, 1.5f, 7);
 	car.chassis_offset.Set(0, 1.5f, 0);
 	car.mass = 6000.0f;
-	car.suspensionStiffness = 10; //15.88f;
-	car.suspensionCompression = 0.83f;
-	car.suspensionDamping = 0.88f;
+	car.suspensionStiffness = 10; 
+	car.suspensionCompression = 0.9f;
+	car.suspensionDamping = 2.0f; 
 	car.maxSuspensionTravelCm = 50.0f;
-	car.frictionSlip = 1;//50.5;
-	car.maxSuspensionForce = 10000.0f;
+	car.frictionSlip = 1;
+	car.maxSuspensionForce = 75000.0f;
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 1.2f;
@@ -214,6 +214,28 @@ update_status ModulePlayer::Update(float dt)
 		vehicle->RightBrake(BRAKE_POWER);
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_REPEAT)
+	{
+		vehicle->RotateTurret(TURRET_SPEED * dt);
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT)
+	{
+		vehicle->RotateTurret(-TURRET_SPEED * dt);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_Y) == KEY_REPEAT)
+	{
+		vehicle->RotateCanon(CANON_SPEED * dt);
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_H) == KEY_REPEAT)
+	{
+		vehicle->RotateCanon(-CANON_SPEED * dt);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		vehicle->Fire();
+	}
 	/*if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		if(turn < TURN_DEGREES)

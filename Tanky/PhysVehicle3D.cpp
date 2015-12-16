@@ -132,6 +132,19 @@ float PhysVehicle3D::GetRightWheelSpeed()
 	return rotation / nWheels;
 }
 
+void PhysVehicle3D::RotateTurret(float amount)
+{
+
+}
+void PhysVehicle3D::RotateCanon(float amount)
+{
+
+}
+
+void PhysVehicle3D::Fire()
+{
+
+}
 
 // ----------------------------------------------------------------------------
 /*void PhysVehicle3D::Turn(float degrees)

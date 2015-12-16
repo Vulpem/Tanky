@@ -51,6 +51,11 @@ public:
 	void RightBrake(float force);
 	void LeftBrake(float force);
 
+	void RotateTurret(float amount);
+	void RotateCanon(float amount);
+
+	void Fire();
+
 	float GetRightWheelSpeed();
 	float GetLeftWheelSpeed();
 	float GetKmh() const;
