@@ -24,6 +24,7 @@ private:
 
 public:
 	
+	float maxDistanceToVehicle = 40.0f;
 	vec3 X, Y, Z, Position, Reference;
 
 private:
