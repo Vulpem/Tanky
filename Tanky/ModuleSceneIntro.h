@@ -14,6 +14,7 @@ public:
 	Tower();
 	Tower(float x, float z, int width, int height)
 	{
+		startPosition = (x, height / 2, z);
 		column.size.x = width;
 		column.size.y = height;
 		column.size.z = width;
@@ -21,12 +22,23 @@ public:
 	}
 	void Update()
 	{
+		float x, y, z;
+		/*
+		pb->GetPos(&x, &y, &z);
+		if (x != startPosition.x || y != startPosition.y || z != startPosition.z)
+		{
+		//	if (pb->)
+		}
 		column.Render();
+		*/
 	}
 
 public:
 	Cube column;
 	PhysBody3D* pb;
+
+	vec3 startPosition;
+	bool fallen = false;
 };
 class ModuleSceneIntro : public Module
 {
