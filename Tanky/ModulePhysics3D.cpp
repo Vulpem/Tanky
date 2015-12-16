@@ -279,10 +279,13 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass)
 // ---------------------------------------------------------
 PhysVehicle3D* ModulePhysics3D::AddVehicle(const VehicleInfo& info)
 {
+	//Chasis----------------
 	btCompoundShape* comShape = new btCompoundShape();
 	shapes.add(comShape);
 
-	btCollisionShape* colShape = new btBoxShape(btVector3(info.chassis_size.x*0.5f, info.chassis_size.y*0.5f, info.chassis_size.z*0.5f));
+	btBoxShape* chasis = new btBoxShape(btVector3(info.chassis_size.x*0.5f, info.chassis_size.y*0.5f, info.chassis_size.z*0.5f));
+
+	btCollisionShape* colShape = chasis;
 	shapes.add(colShape);
 	
 	btTransform trans;
@@ -291,6 +294,18 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(const VehicleInfo& info)
 
 	comShape->addChildShape(trans, colShape);
 
+	//Turret --------------
+	btSphereShape* turret = new btSphereShape(info.chassis_size.y);
+
+	colShape = turret;
+	shapes.add(colShape);
+
+	trans.setIdentity();
+	trans.setOrigin(btVector3(info.chassis_offset.x, info.chassis_offset.y + info.chassis_size.y * 0.5, info.chassis_offset.z));
+
+	comShape->addChildShape(trans, colShape);
+
+	//Transform ---------------
 	btTransform startTransform;
 	startTransform.setIdentity();
 
