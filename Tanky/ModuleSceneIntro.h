@@ -3,6 +3,7 @@
 #include "p2DynArray.h"
 #include "Globals.h"
 #include "Primitive.h"
+#include "PhysBody3D.h"
 
 #define MAX_SNAKE 2
 
@@ -12,25 +13,35 @@ class Tower
 {
 public:
 	Tower();
-	Tower(float x, float z, int width, int height)
+	Tower(float x, float z, int width, float height)
 	{
-		startPosition = (x, height / 2, z);
+		startPosition.x = x;
+		startPosition.y = height / 2;
+		startPosition.z = z;
 		column.size.x = width;
 		column.size.y = height;
 		column.size.z = width;
-		column.SetPos(x, height/2, z);
+		column.SetPos(x, (height/2), z);
+		
 	}
 	void Update()
 	{
 		float x, y, z;
-		/*
+		
 		pb->GetPos(&x, &y, &z);
-		if (x != startPosition.x || y != startPosition.y || z != startPosition.z)
+		float difX = startPosition.x - x;
+		float difY = startPosition.y - y;
+		float difZ = startPosition.z - z;
+		if (difX < -0.2f || 0.2f < difX || difY < -0.2f || 0.2f < difY || difZ < -0.2f || 0.2f < difZ)
 		{
-		//	if (pb->)
+			if (pb->isResting())
+			{
+				fallen = true;
+				column.color = { 0.5f, 0, 0 };
+			}
 		}
 		column.Render();
-		*/
+		
 	}
 
 public:
