@@ -8,7 +8,26 @@
 
 struct PhysBody3D;
 struct PhysMotor3D;
+class Tower
+{
+public:
+	Tower();
+	Tower(float x, float z, int width, int height)
+	{
+		column.size.x = width;
+		column.size.y = height;
+		column.size.z = width;
+		column.SetPos(x, height/2, z);
+	}
+	void Update()
+	{
+		column.Render();
+	}
 
+public:
+	Cube column;
+	PhysBody3D* pb;
+};
 class ModuleSceneIntro : public Module
 {
 public:
@@ -23,5 +42,6 @@ public:
 
 public:
 	Cube s;
+	Tower* tower = NULL;
 	PhysBody3D* sensor;
 };

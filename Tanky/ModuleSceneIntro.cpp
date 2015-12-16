@@ -27,6 +27,8 @@ bool ModuleSceneIntro::Start()
 	sensor->SetAsSensor(true);
 	sensor->collision_listeners.add(this);
 
+	tower = new Tower(20, 20, 2.5f, 10);
+	tower->pb = App->physics->AddBody(tower->column);
 	return ret;
 }
 
@@ -41,6 +43,8 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+	tower->pb->GetTransform(&tower->column.transform);
+	tower->Update();
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
