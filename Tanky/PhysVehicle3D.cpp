@@ -64,8 +64,22 @@ void PhysVehicle3D::Render()
 	Sphere turret;
 	turret.radius = info.turret.turretRadius;
 	vehicle->getChassisWorldTransform().getOpenGLMatrix(&turret.transform);
-	
+	vec3 turretCenter;
+	turretCenter.x = turret.transform.translation().x + info.chassis_offset.x;
+	turretCenter.y = turret.transform.translation().y + info.chassis_size.y * 0.5 + 1 + info.chassis_offset.y;
+	turretCenter.z = turret.transform.translation().z + info.turret.turretOffset + info.chassis_offset.z;
+
+	turret.transform.translate(turretCenter.x, turretCenter.y, turretCenter.z);
+
 	turret.Render();
+
+	//Turret base render
+	Cylinder turretBase;
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&turret.transform);
+	turret.transform.translate(turretCenter.x, turretCenter.y - 1, turretCenter.z);
+	turretBase.height = 1.0f;
+	turretBase.radius = turret.radius;
+	turretBase.Render();
 }
 
 // ----------------------------------------------------------------------------

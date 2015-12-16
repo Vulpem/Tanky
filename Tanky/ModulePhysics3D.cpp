@@ -301,7 +301,7 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(const VehicleInfo& info)
 	shapes.add(colShape);
 
 	trans.setIdentity();
-	trans.setOrigin(btVector3(info.chassis_offset.x, info.chassis_offset.y + info.chassis_size.y * 0.5, info.chassis_offset.z + info.turret.turretOffset));
+	trans.setOrigin(btVector3(info.chassis_offset.x, info.chassis_offset.y + info.chassis_size.y * 0.5 + 1, info.chassis_offset.z + info.turret.turretOffset));
 
 	comShape->addChildShape(trans, colShape);
 
