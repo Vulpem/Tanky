@@ -77,3 +77,8 @@ bool PhysBody3D::IsSensor() const
 {
 	return is_sensor;
 }
+
+bool PhysBody3D::isResting()
+{
+	return body->isActive();
+}
