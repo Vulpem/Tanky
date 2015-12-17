@@ -267,8 +267,8 @@ update_status ModulePlayer::PostUpdate(float dt)
 		y = (tY - cY);
 		z = (tZ - cZ);
 
-		App->physics->Shoot({ cX - x, cY - y, cZ - z }, { -x, -y, -z }, 100.0f, 0.5f);
-		vehicle->Push(x * 10000, y * 10000, z * 10000);
+		App->physics->Shoot({ cX - x, cY - y, cZ - z }, { -x, -y, -z }, 60.0f, 0.5f);
+		vehicle->Push(x * 8000, y *100 - 20000, z * 8000);
 	}
 	return UPDATE_CONTINUE;
 }
