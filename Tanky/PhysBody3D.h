@@ -22,6 +22,7 @@ public:
 	void SetAsSensor(bool is_sensor);
 	bool IsSensor() const;
 	bool isResting();
+	void SetInactive();
 
 private:
 	btRigidBody* body = nullptr;

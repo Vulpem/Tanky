@@ -4,6 +4,7 @@
 #include "Primitive.h"
 #include "PhysBody3D.h"
 
+
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
@@ -27,10 +28,11 @@ bool ModuleSceneIntro::Start()
 	sensor->SetAsSensor(true);
 	sensor->collision_listeners.add(this);
 
-	tower = new Tower(5, 5, 5);
+	tower = new Tower(5, 5, 10);
 	for (int i = 0; i < tower->cubes.Count(); i++)
 	{
 		tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
+		tower->pbs[i]->SetInactive();
 	}
 	return ret;
 }

@@ -82,3 +82,8 @@ bool PhysBody3D::isResting()
 {
 	return !body->isActive();
 }
+
+void PhysBody3D::SetInactive()
+{
+	body->setActivationState(WANTS_DEACTIVATION);
+}
