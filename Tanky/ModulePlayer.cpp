@@ -243,10 +243,6 @@ update_status ModulePlayer::Update(float dt)
 		vehicle->RotateCanon(0);
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	{
-		vehicle->Fire();
-	}
 
 	vehicle->Render();
 
@@ -257,5 +253,24 @@ update_status ModulePlayer::Update(float dt)
 	return UPDATE_CONTINUE;
 }
 
+update_status ModulePlayer::PostUpdate(float dt)
+{
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		float tX, tY, tZ;
+		vehicle->info.turret.turret->GetPos(&tX, &tY, &tZ);
+		float cX, cY, cZ;
+		vehicle->info.turret.turret->GetPos(&cX, &cY, &cZ);
+
+		float x, y, z;
+		x = cX + (tX - cX);
+		y = cY + (tY - cY);
+		z = cZ + (tZ - cZ);
+
+		App->physics->Shoot({ x, y, z }, { 1,0,0 }, 100.0f, 0.5f);
+		int a = 0;
+	}
+	return UPDATE_CONTINUE;
+}
 
 

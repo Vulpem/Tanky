@@ -5,6 +5,9 @@
 
 #include "Bullet/src/btBulletDynamicsCommon.h"
 
+#include "Globals.h"
+#include "ModulePhysics3D.h"
+
 class btRaycastVehicle;
 struct PhysBody3D;
 

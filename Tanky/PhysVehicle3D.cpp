@@ -1,6 +1,5 @@
 #include "PhysVehicle3D.h"
 #include "Primitive.h"
-#include "Bullet\src\btBulletDynamicsCommon.h"
 
 // ----------------------------------------------------------------------------
 VehicleInfo::~VehicleInfo()
@@ -174,7 +173,7 @@ void PhysVehicle3D::RotateCanon(float amount)
 
 void PhysVehicle3D::Fire()
 {
-
+	
 }
 
 // ----------------------------------------------------------------------------
