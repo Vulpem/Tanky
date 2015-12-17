@@ -27,8 +27,6 @@ public:
 	void CheckTowersNumbers();
 
 public:
-	Cube s;
-
 	int allyTowers = 0;
 	int enemyTowers = 0;
 
@@ -37,5 +35,4 @@ public:
 	vec4* neutralPositions;
 
 	p2DynArray<Tower*> towers;
-	PhysBody3D* sensor;
 };

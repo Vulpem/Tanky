@@ -21,13 +21,6 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
-	s.size = vec3(5, 3, 1);
-	s.SetPos(0, 2.5f, 20);
-
-	sensor = App->physics->AddBody(s, 0.0f);
-	sensor->SetAsSensor(true);
-	sensor->collision_listeners.add(this);
-
 	LoadTowers();
 	LOG("%i", allyTowers);
 	LOG("%i", enemyTowers);
@@ -63,13 +56,12 @@ update_status ModuleSceneIntro::Update(float dt)
 
 		}
 	}
-
-	Plane p(0, 1, 0, 0);
+	
+	Plane p(0, 0, 0, 1);
 	p.axis = true;
+	p.color = Color{ 1, 1, 1 , 1};
 	p.Render();
-
-	sensor->GetTransform(&s.transform);
-	s.Render();
+	
 
 	return UPDATE_CONTINUE;
 }
