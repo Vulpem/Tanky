@@ -260,15 +260,15 @@ update_status ModulePlayer::PostUpdate(float dt)
 		float tX, tY, tZ;
 		vehicle->info.turret.turret->GetPos(&tX, &tY, &tZ);
 		float cX, cY, cZ;
-		vehicle->info.turret.turret->GetPos(&cX, &cY, &cZ);
+		vehicle->info.turret.canon->GetPos(&cX, &cY, &cZ);
 
 		float x, y, z;
-		x = cX + (tX - cX);
-		y = cY + (tY - cY);
-		z = cZ + (tZ - cZ);
+		x = (tX - cX);
+		y = (tY - cY);
+		z = (tZ - cZ);
 
-		App->physics->Shoot({ x, y, z }, { 1,0,0 }, 100.0f, 0.5f);
-		int a = 0;
+		App->physics->Shoot({ cX - x, cY - y, cZ - z }, { -x, -y, -z }, 100.0f, 0.5f);
+		vehicle->Push(x * 10000, y * 10000, z * 10000);
 	}
 	return UPDATE_CONTINUE;
 }
