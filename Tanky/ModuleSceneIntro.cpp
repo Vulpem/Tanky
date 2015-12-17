@@ -21,6 +21,8 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
+//	floor = Cube(50, 0.2f, 50);
+//	App->physics->AddBody(floor);
 	LoadTowers();
 	LOG("%i", allyTowers);
 	LOG("%i", enemyTowers);
@@ -38,6 +40,8 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+	floor.Render();
+
 	for (int i = 0; i < towers.Count(); i++)
 	{
 		if (towers[i]->Update() == false)
@@ -56,11 +60,7 @@ update_status ModuleSceneIntro::Update(float dt)
 
 		}
 	}
-	
-	Plane p(0, 0, 0, 1);
-	p.axis = true;
-	p.color = Color{ 1, 1, 1 , 1};
-	p.Render();
+
 	
 
 	return UPDATE_CONTINUE;

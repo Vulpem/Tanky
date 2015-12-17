@@ -27,6 +27,9 @@ public:
 	void CheckTowersNumbers();
 
 public:
+
+	Cube floor;
+
 	int allyTowers = 0;
 	int enemyTowers = 0;
 
