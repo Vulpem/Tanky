@@ -69,24 +69,17 @@ void PhysVehicle3D::Render()
 	turret.transform = transform;
 
 	turret.Render();
-	/*
-	//Turret base render
-	Cylinder turretBase;
-	//info.turret.turret->
-	vehicle->getChassisWorldTransform().getOpenGLMatrix(&turret.transform);
-	turret.transform.translate(turretCenter.x, turretCenter.y - 1, turretCenter.z);
-	turretBase.height = 1.0f;
-	turretBase.radius = turret.radius;
-	turretBase.Render();*/
 
 	//Turret base render
 	Cylinder turretBase;
+	turretBase.color = Blue;
 	float x, y, z;
 	info.turret.turret->GetPos(&x,&y,&z);
 	
-	turret.transform.translate(x, y - 1, z);
-	turretBase.height = 1.0f;
-	turretBase.radius = turret.radius;
+	turretBase.transform.translate(x, y - 1, z);
+	turretBase.SetRotation(90, {0,0,1});
+	turretBase.height = 2.0f;
+	turretBase.radius = turret.radius + 0.3;
 	turretBase.Render();
 }
 
