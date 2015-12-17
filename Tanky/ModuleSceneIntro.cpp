@@ -30,7 +30,7 @@ bool ModuleSceneIntro::Start()
 
 	for (int i = 0; i < 10; i++)
 	{
-		Tower* tower = new Tower(5 * i, 5 * i, 5, 2);
+		Tower* tower = new Tower(5 * i, 5 * i, TOWER_ALLY, 5, 2);
 		for (int i = 0; i < tower->cubes.Count(); i++)
 		{
 			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));

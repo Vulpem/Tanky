@@ -2,8 +2,9 @@
 
 Tower::Tower()
 {}
-Tower::Tower(float x, float z, float height, float cubeSize)
+Tower::Tower(float x, float z, TOWER_TYPE newType, float height, float cubeSize)
 {
+	type = newType;
 	for (int h = 0; h < height; h++)
 	{
 		int w = 0;
@@ -18,7 +19,7 @@ Tower::Tower(float x, float z, float height, float cubeSize)
 
 		cube->SetPos(x, y + h*cubeSize, z);
 		positions.PushBack({ x, y + h*cubeSize, z });
-		cube->color = Color(0.8f, 0.3f, 0.0f);
+		cube->color = GetColor(type);
 
 		cubes.PushBack(cube);
 	}
@@ -35,7 +36,7 @@ void Tower::Update()
 	{
 		if (isDestroyed())
 		{
-			ChangeColor(Color{ 0.0f, 0.6f, 0.0f });
+			ChangeColor(Color{ 0.5f, 0.5f, 0.5f });
 			fallen = true;
 		}
 	}
@@ -53,7 +54,7 @@ bool Tower::isDestroyed()
 		float difZ = abs(z - positions[i].z);
 
 		float distance = difX + difY + difZ;
-		if (distance > 1.0f)
+		if (distance > 3.0f)
 			blocksDown++;
 	}
 	if (blocksDown > pbs.Count() / 3 + 0.5)
@@ -67,4 +68,22 @@ void Tower::ChangeColor(Color color)
 	{
 		cubes[i]->color = color;
 	}
+}
+
+Color Tower::GetColor(TOWER_TYPE type)
+{
+	Color color;
+	switch (type)
+	{
+	case(TOWER_ALLY):
+		color = { 0.0f, 0.5f, 0.8f };
+		break;
+	case(TOWER_ENEMY) :
+		color = { 0.8f, 0.3f, 0.0f };
+		break;
+	case(TOWER_NEUTRAL) :
+		color = { 1.0f, 1.0f, 1.0f };
+		break;
+	}
+	return color;
 }

@@ -5,15 +5,23 @@
 #include "Application.h"
 #include "ModulePhysics3D.h"
 
+enum TOWER_TYPE
+{
+	TOWER_ALLY = 0,
+	TOWER_ENEMY,
+	TOWER_NEUTRAL,
+};
+
 class Tower
 {
 public:
 	Tower();
-	Tower(float x, float z, float height = 10, float cubeSize = 1);
+	Tower(float x, float z, TOWER_TYPE type, float height = 10, float cubeSize = 1);
 	void Update();
 
 	bool isDestroyed();
 	void ChangeColor(Color);
+	Color GetColor(TOWER_TYPE);
 
 
 public:
@@ -21,5 +29,6 @@ public:
 	p2DynArray<PhysBody3D*> pbs;
 	p2DynArray<vec3> positions;
 
+	TOWER_TYPE type;
 	bool fallen = false;
 };
