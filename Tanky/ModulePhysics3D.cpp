@@ -107,6 +107,8 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 		}
 	}
 
+
+
 	return UPDATE_CONTINUE;
 }
 
@@ -133,6 +135,12 @@ update_status ModulePhysics3D::Update(float dt)
 			Shoot({ App->camera->Position.x, App->camera->Position.y, App->camera->Position.z }, { -(App->camera->Z.x), -(App->camera->Z.y), -(App->camera->Z.z) }, 30.0f, 1.0f);
 		}
 	}
+
+	Cube cube;
+	cube.color = { 0.8f, 1.0f, 0.8f };
+	cube.size = { 1000, 10, 1000 };
+	cube.SetPos(0, -5.1f, 0);
+	cube.Render();
 
 	return UPDATE_CONTINUE;
 }
