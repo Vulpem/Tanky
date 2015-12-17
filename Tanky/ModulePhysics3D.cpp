@@ -345,18 +345,16 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(VehicleInfo& info, float x, float y, 
 	// ---------------------
 
 	//Horizontal joint
-	btHingeConstraint* hinge = new btHingeConstraint(
+	info.turret.horizontalJoint = new btHingeConstraint(
 		*(body),
 		*(info.turret.turret->body),
 		btVector3(info.chassis_offset.x, info.chassis_offset.y + info.chassis_size.y * 0.5 + 1, info.chassis_offset.z + info.turret.turretOffset),
-		btVector3(0,0,0),
+		btVector3(0, 0, 0),
 		btVector3(0,1,0),
 		btVector3(0, 1, 0));
-	world->addConstraint(hinge);
-	constraints.add(hinge);
-	hinge->setDbgDrawSize(2.0f);
-
-	hinge->enableAngularMotor(true, 100, 1000);
+	world->addConstraint(info.turret.horizontalJoint);
+	constraints.add(info.turret.horizontalJoint);
+	info.turret.horizontalJoint->setDbgDrawSize(2.0f);
 
 	PhysVehicle3D* pvehicle = new PhysVehicle3D(body, vehicle, info);
 	world->addVehicle(vehicle);

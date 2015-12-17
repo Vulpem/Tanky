@@ -220,13 +220,16 @@ update_status ModulePlayer::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_REPEAT)
 	{
-		vehicle->RotateTurret(TURRET_SPEED * dt);
+		vehicle->RotateTurret(-TURRET_SPEED * dt);
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT)
 	{
-		vehicle->RotateTurret(-TURRET_SPEED * dt);
+		vehicle->RotateTurret(TURRET_SPEED * dt);
 	}
-
+	else
+	{
+		vehicle->RotateTurret(0);
+	}
 	if (App->input->GetKey(SDL_SCANCODE_Y) == KEY_REPEAT)
 	{
 		vehicle->RotateCanon(CANON_SPEED * dt);
@@ -235,22 +238,15 @@ update_status ModulePlayer::Update(float dt)
 	{
 		vehicle->RotateCanon(-CANON_SPEED * dt);
 	}
+	else
+	{
+		vehicle->RotateCanon(0);
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		vehicle->Fire();
 	}
-	/*if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	{
-		if(turn < TURN_DEGREES)
-			turn +=  TURN_DEGREES;
-	}
-
-	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	{
-		if(turn > -TURN_DEGREES)
-			turn -= TURN_DEGREES;
-	}*/
 
 	vehicle->Render();
 

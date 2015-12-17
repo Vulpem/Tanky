@@ -78,6 +78,16 @@ void PhysVehicle3D::Render()
 	turretBase.height = 1.0f;
 	turretBase.radius = turret.radius;
 	turretBase.Render();*/
+
+	//Turret base render
+	Cylinder turretBase;
+	float x, y, z;
+	info.turret.turret->GetPos(&x,&y,&z);
+	
+	turret.transform.translate(x, y - 1, z);
+	turretBase.height = 1.0f;
+	turretBase.radius = turret.radius;
+	turretBase.Render();
 }
 
 // ----------------------------------------------------------------------------
@@ -153,7 +163,7 @@ float PhysVehicle3D::GetRightWheelSpeed()
 
 void PhysVehicle3D::RotateTurret(float amount)
 {
-
+	info.turret.horizontalJoint->enableAngularMotor(true, amount, 200);
 }
 void PhysVehicle3D::RotateCanon(float amount)
 {
@@ -166,16 +176,7 @@ void PhysVehicle3D::Fire()
 }
 
 // ----------------------------------------------------------------------------
-/*void PhysVehicle3D::Turn(float degrees)
-{
-	for(int i = 0; i < vehicle->getNumWheels(); ++i)
-	{
-		if(info.wheels[i].steering == true)
-		{
-			vehicle->setSteeringValue(degrees, i);
-		}
-	}
-}*/
+
 
 // ----------------------------------------------------------------------------
 float PhysVehicle3D::GetKmh() const
