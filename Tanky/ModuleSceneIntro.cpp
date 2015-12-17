@@ -30,7 +30,7 @@ bool ModuleSceneIntro::Start()
 
 	for (int i = 0; i < 10; i++)
 	{
-		Tower* tower = new Tower(5 * i, 5 * i, 10);
+		Tower* tower = new Tower(5 * i, 5 * i, 5, 2);
 		for (int i = 0; i < tower->cubes.Count(); i++)
 		{
 			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
@@ -55,11 +55,6 @@ update_status ModuleSceneIntro::Update(float dt)
 {
 	for (int i = 0; i < towers.Count(); i++)
 	{
-		for (int j = 0; j < towers[i]->cubes.Count(); j++)
-		{
-			towers[i]->pbs[j]->GetTransform(&towers[i]->cubes[j]->transform);
-		}
-
 		towers[i]->Update();
 	}
 
