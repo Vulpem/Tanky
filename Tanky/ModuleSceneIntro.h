@@ -32,6 +32,10 @@ public:
 	int allyTowers = 0;
 	int enemyTowers = 0;
 
+	vec4* allyPositions;
+	vec4* enemyPositions;
+	vec4* neutralPositions;
+
 	p2DynArray<Tower*> towers;
 	PhysBody3D* sensor;
 };

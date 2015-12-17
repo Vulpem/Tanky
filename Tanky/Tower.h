@@ -16,7 +16,7 @@ class Tower
 {
 public:
 	Tower();
-	Tower(float x, float z, TOWER_TYPE type, float height = 10, float cubeSize = 1);
+	Tower(float x, float y, float z, TOWER_TYPE type, float height = 10, float cubeSize = 2);
 	bool Update();
 
 	bool isDestroyed();

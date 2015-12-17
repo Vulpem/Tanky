@@ -81,11 +81,22 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 
 void ModuleSceneIntro::LoadTowers()
 {
-	
+	//Towers Positions
+	neutralPositions = new vec4[10];
+	neutralPositions[0] = { 1, 0, 1, 3};
+	neutralPositions[1] = { 3, 0, 1, 3};
+	neutralPositions[2] = { 5, 0, 1, 3};
+	neutralPositions[3] = { 7, 0, 1, 3};
+	neutralPositions[4] = { 9, 0, 1, 3};
+	neutralPositions[5] = { -1, 0, 1, 3};
+	neutralPositions[6] = { -3, 0, 1, 3};
+	neutralPositions[7] = { -5, 0, 1, 3};
+	neutralPositions[8] = { -7, 0, 1, 3};
+	neutralPositions[9] = { -9, 0, 1, 3};
 	//Allies
 	for (int i = 0; i < 10; i++)
 	{
-		Tower* tower = new Tower(5 * i - 20, 5 * i + 0, TOWER_ALLY, 5, 2);
+		Tower* tower = new Tower(5 * i - 20, 0, 5 * i + 0, TOWER_ALLY, 5, 2);
 		for (int i = 0; i < tower->cubes.Count(); i++)
 		{
 			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
@@ -96,9 +107,10 @@ void ModuleSceneIntro::LoadTowers()
 	}
 
 	//Enemies
+	
 	for (int i = 0; i < 10; i++)
 	{
-		Tower* tower = new Tower(5 * i - 20, 5 * i + 10, TOWER_ENEMY, 5, 2);
+		Tower* tower = new Tower(5 * i - 20, 0, 5 * i + 10, TOWER_ENEMY, 5);
 		for (int i = 0; i < tower->cubes.Count(); i++)
 		{
 			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
@@ -112,7 +124,7 @@ void ModuleSceneIntro::LoadTowers()
 
 	for (int i = 0; i < 10; i++)
 	{
-		Tower* tower = new Tower(2 * i - 20, 10 - abs(2 * (5 - i)) + 20, TOWER_NEUTRAL, 5 - abs(5 - i), 2);
+		Tower* tower = new Tower((int)neutralPositions[i].x, (int)neutralPositions[i].y, (int)neutralPositions[i].z, TOWER_NEUTRAL, neutralPositions[i].w);
 		for (int i = 0; i < tower->cubes.Count(); i++)
 		{
 			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i], 0.0f));

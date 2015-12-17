@@ -2,7 +2,7 @@
 
 Tower::Tower()
 {}
-Tower::Tower(float x, float z, TOWER_TYPE newType, float height, float cubeSize)
+Tower::Tower(float x, float y, float z, TOWER_TYPE newType, float height, float cubeSize)
 {
 	type = newType;
 	for (int h = 0; h < height; h++)
@@ -15,10 +15,10 @@ Tower::Tower(float x, float z, TOWER_TYPE newType, float height, float cubeSize)
 			offsetX = cubeSize;
 		if (w > 1)
 			offsetZ = cubeSize;
-		int y = cubeSize / 2;
+		int posY = y + cubeSize / 2;
 
-		cube->SetPos(x, y + h*cubeSize, z);
-		positions.PushBack({ x, y + h*cubeSize, z });
+		cube->SetPos(x, posY + h*cubeSize, z);
+		positions.PushBack({ x, posY + h*cubeSize, z });
 		cube->color = GetColor(type);
 
 		cubes.PushBack(cube);
