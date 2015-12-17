@@ -26,6 +26,6 @@ public:
 
 public:
 	Cube s;
-	Tower* tower = NULL;
+	p2DynArray<Tower*> towers;
 	PhysBody3D* sensor;
 };
