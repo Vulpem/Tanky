@@ -277,7 +277,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass)
 }
 
 // ---------------------------------------------------------
-PhysVehicle3D* ModulePhysics3D::AddVehicle(VehicleInfo& info)
+PhysVehicle3D* ModulePhysics3D::AddVehicle(VehicleInfo& info, float x, float y, float z)
 {
 	//Chasis----------------
 	btCompoundShape* comShape = new btCompoundShape();
@@ -294,18 +294,7 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(VehicleInfo& info)
 
 	comShape->addChildShape(trans, colShape);
 
-	//Turret --------------
-	btSphereShape* turret = new btSphereShape(info.turret.turretRadius);
 
-	colShape = turret;
-	shapes.add(colShape);
-
-	trans.setIdentity();
-	trans.setOrigin(btVector3(info.chassis_offset.x, info.chassis_offset.y + info.chassis_size.y * 0.5 + 1, info.chassis_offset.z + info.turret.turretOffset));
-
-	comShape->addChildShape(trans, colShape);
-
-	//Transform ---------------
 	btTransform startTransform;
 	startTransform.setIdentity();
 
@@ -313,13 +302,15 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(VehicleInfo& info)
 	comShape->calculateLocalInertia(info.mass, localInertia);
 
 	btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
-	btRigidBody::btRigidBodyConstructionInfo rbInfo(info.mass, myMotionState, comShape, localInertia);
 
-	btRigidBody* body = new btRigidBody(rbInfo);
+	btRigidBody* body = new btRigidBody(info.mass, myMotionState, comShape, localInertia);
 	body->setContactProcessingThreshold(BT_LARGE_FLOAT);
 	body->setActivationState(DISABLE_DEACTIVATION);
 
 	world->addRigidBody(body);
+
+	//Transform ---------------
+	
 
 	btRaycastVehicle::btVehicleTuning tuning;
 	tuning.m_frictionSlip = info.frictionSlip;
@@ -342,11 +333,22 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(VehicleInfo& info)
 		vehicle->addWheel(conn, dir, axis, info.wheels[i].suspensionRestLength, info.wheels[i].radius, tuning, info.wheels[i].front);
 	}
 	// ---------------------
-	info.turret.turret = turret;
+	
 
 	PhysVehicle3D* pvehicle = new PhysVehicle3D(body, vehicle, info);
 	world->addVehicle(vehicle);
 	vehicles.add(pvehicle);
+
+	pvehicle->SetPos(x, y, z);
+
+
+	//Turret --------------
+	Sphere turret(info.turret.turretRadius);
+	turret.SetPos(x+info.chassis_offset.x, y+info.chassis_offset.y + info.chassis_size.y * 0.5 + 1, z+info.chassis_offset.z + info.turret.turretOffset);
+	info.turret.turret = AddBody(turret);
+	
+
+
 
 	return pvehicle;
 }

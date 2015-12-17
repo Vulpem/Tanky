@@ -3,7 +3,7 @@
 #include "PhysBody3D.h"
 #include "glmath.h"
 
-#include "Bullet/src/btBulletDynamicsCommon.h"
+//#include "Bullet/src/btBulletDynamicsCommon.h"
 
 class btRaycastVehicle;
 struct PhysBody3D;
@@ -31,7 +31,7 @@ struct Turret
 	float canonLength;
 	float canonRadius;
 
-	btSphereShape* turret;
+	PhysBody3D* turret;
 };
 
 struct VehicleInfo

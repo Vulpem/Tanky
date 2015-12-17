@@ -38,7 +38,7 @@ void PhysVehicle3D::Render()
 
 		wheelRadius.size = { info.wheels[i].width+0.1f, info.wheels[i].radius * 2, 0.1f };
 
-		vehicle->updateWheelTransform(i);
+		//vehicle->updateWheelTransform(i);
 		vehicle->getWheelInfo(i).m_worldTransform.getOpenGLMatrix(&wheel.transform);
 		wheelRadius.transform = wheel.transform;
 
