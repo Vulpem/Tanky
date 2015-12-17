@@ -9,8 +9,9 @@ Tower::Tower(float x, float z, float height, float cubeSize)
 	startPosition.z = z;
 	for (int h = 0; h < height; h++)
 	{
-		for (int w = 0; w < 4; w++)
-		{
+		int w = 0;
+	//	for (int w = 0; w < 4; w++)
+	//	{
 			Cube* cube = new Cube(cubeSize, cubeSize, cubeSize);
 			float offsetX = 0;
 			float offsetZ = 0;
@@ -25,7 +26,7 @@ Tower::Tower(float x, float z, float height, float cubeSize)
 			cube->SetPos(x, y, z);
 			cubes.PushBack(cube);
 
-		}
+	//	}
 	}
 	/*
 	column.size.x = cubeSize;
