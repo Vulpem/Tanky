@@ -277,7 +277,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass)
 }
 
 // ---------------------------------------------------------
-PhysVehicle3D* ModulePhysics3D::AddVehicle(const VehicleInfo& info)
+PhysVehicle3D* ModulePhysics3D::AddVehicle(VehicleInfo& info)
 {
 	//Chasis----------------
 	btCompoundShape* comShape = new btCompoundShape();
@@ -342,8 +342,9 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(const VehicleInfo& info)
 		vehicle->addWheel(conn, dir, axis, info.wheels[i].suspensionRestLength, info.wheels[i].radius, tuning, info.wheels[i].front);
 	}
 	// ---------------------
+	info.turret.turret = turret;
 
-	PhysVehicle3D* pvehicle = new PhysVehicle3D(body, vehicle,/* turret,*/ info);
+	PhysVehicle3D* pvehicle = new PhysVehicle3D(body, vehicle, info);
 	world->addVehicle(vehicle);
 	vehicles.add(pvehicle);
 

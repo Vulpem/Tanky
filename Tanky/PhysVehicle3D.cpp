@@ -10,7 +10,7 @@ VehicleInfo::~VehicleInfo()
 }
 
 // ----------------------------------------------------------------------------
-PhysVehicle3D::PhysVehicle3D(btRigidBody* body, btRaycastVehicle* vehicle,/* btSphereShape* _turret, */const VehicleInfo& info) : PhysBody3D(body), vehicle(vehicle), info(info)//, turret(_turret)
+PhysVehicle3D::PhysVehicle3D(btRigidBody* body, btRaycastVehicle* vehicle, const VehicleInfo& info) : PhysBody3D(body), vehicle(vehicle), info(info)
 {
 }
 
@@ -75,6 +75,7 @@ void PhysVehicle3D::Render()
 
 	//Turret base render
 	Cylinder turretBase;
+	//info.turret.turret->
 	vehicle->getChassisWorldTransform().getOpenGLMatrix(&turret.transform);
 	turret.transform.translate(turretCenter.x, turretCenter.y - 1, turretCenter.z);
 	turretBase.height = 1.0f;

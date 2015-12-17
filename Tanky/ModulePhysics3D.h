@@ -30,7 +30,7 @@ public:
 	PhysBody3D* AddBody(const Sphere& sphere, float mass = 1.0f);
 	PhysBody3D* AddBody(const Cube& cube, float mass = 1.0f);
 	PhysBody3D* AddBody(const Cylinder& cylinder, float mass = 1.0f);
-	PhysVehicle3D* AddVehicle(const VehicleInfo& info);
+	PhysVehicle3D* AddVehicle(VehicleInfo& info);
 
 	void Shoot(vec3 position, vec3 direction, float force, float radius = 1);
 
