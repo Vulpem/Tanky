@@ -28,9 +28,10 @@ bool ModuleSceneIntro::Start()
 	sensor->SetAsSensor(true);
 	sensor->collision_listeners.add(this);
 
+	//Allies
 	for (int i = 0; i < 10; i++)
 	{
-		Tower* tower = new Tower(5 * i, 5 * i, TOWER_ALLY, 5, 2);
+		Tower* tower = new Tower(5 * i - 20, 5 * i + 0, TOWER_ALLY, 5, 2);
 		for (int i = 0; i < tower->cubes.Count(); i++)
 		{
 			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
@@ -39,6 +40,31 @@ bool ModuleSceneIntro::Start()
 		towers.PushBack(tower);
 	}
 
+	//Enemies
+	for (int i = 0; i < 10; i++)
+	{
+		Tower* tower = new Tower(5 * i - 20, 5 * i + 10, TOWER_ENEMY, 5, 2);
+		for (int i = 0; i < tower->cubes.Count(); i++)
+		{
+			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
+			tower->pbs[i]->SetInactive();
+		}
+		towers.PushBack(tower);
+	}
+
+	//Neutrals
+	
+	for (int i = 0; i < 10; i++)
+	{
+		Tower* tower = new Tower(5 * i - 20, 5 * i + 20, TOWER_NEUTRAL, 5, 2);
+		for (int i = 0; i < tower->cubes.Count(); i++)
+		{
+			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i], 0.0f));
+			tower->pbs[i]->SetInactive();
+		}
+		towers.PushBack(tower);
+	}
+	
 	return ret;
 }
 
