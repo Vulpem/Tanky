@@ -81,6 +81,15 @@ void PhysVehicle3D::Render()
 	turretBase.height = 2.0f;
 	turretBase.radius = turret.radius + 0.3;
 	turretBase.Render();
+
+	//Canon render
+	Cylinder canon;
+	canon.height = info.turret.canonLength;
+	canon.radius = info.turret.canonRadius;
+	info.turret.canon->GetTransform(matrix);
+	mat4x4 transform2(matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5], matrix[6], matrix[7], matrix[8], matrix[9], matrix[10], matrix[11], matrix[12], matrix[13], matrix[14], matrix[15]);
+	canon.transform = transform2;
+	canon.Render();
 }
 
 // ----------------------------------------------------------------------------
@@ -156,11 +165,11 @@ float PhysVehicle3D::GetRightWheelSpeed()
 
 void PhysVehicle3D::RotateTurret(float amount)
 {
-	info.turret.horizontalJoint->enableAngularMotor(true, amount, 200);
+	info.turret.horizontalJoint->enableAngularMotor(true, amount, 1000);
 }
 void PhysVehicle3D::RotateCanon(float amount)
 {
-
+	info.turret.verticalJoint->enableAngularMotor(true, amount, 1000);
 }
 
 void PhysVehicle3D::Fire()

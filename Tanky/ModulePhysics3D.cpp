@@ -338,8 +338,12 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(VehicleInfo& info, float x, float y, 
 
 
 	//Turret --------------
+	vec3 turretCenter;
+	turretCenter.x = x + info.chassis_offset.x;
+	turretCenter.y = y + info.chassis_offset.y + info.chassis_size.y * 0.5 + 1;
+	turretCenter.z = z + info.chassis_offset.z + info.turret.turretOffset;
 	Sphere turret(info.turret.turretRadius);
-	turret.SetPos(x+info.chassis_offset.x, y+info.chassis_offset.y + info.chassis_size.y * 0.5 + 1, z+info.chassis_offset.z + info.turret.turretOffset);
+	turret.SetPos(turretCenter.x, turretCenter.y, turretCenter.z);
 	info.turret.turret = AddBody(turret);
 	
 	// ---------------------
@@ -348,13 +352,40 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(VehicleInfo& info, float x, float y, 
 	info.turret.horizontalJoint = new btHingeConstraint(
 		*(body),
 		*(info.turret.turret->body),
-		btVector3(info.chassis_offset.x, info.chassis_offset.y + info.chassis_size.y * 0.5 + 1, info.chassis_offset.z + info.turret.turretOffset),
+		btVector3(turretCenter.x - x, turretCenter.y - y, turretCenter.z - z),
 		btVector3(0, 0, 0),
 		btVector3(0,1,0),
 		btVector3(0, 1, 0));
-	world->addConstraint(info.turret.horizontalJoint);
+	world->addConstraint(info.turret.horizontalJoint, true);
 	constraints.add(info.turret.horizontalJoint);
 	info.turret.horizontalJoint->setDbgDrawSize(2.0f);
+
+	//------------------------
+
+	//Canon
+
+	Cylinder canon(info.turret.canonRadius, info.turret.canonLength);
+	//canon.SetRotation(90, { 0,1,0 });
+	canon.SetPos(turretCenter.x, turretCenter.y, turretCenter.z + info.turret.canonLength);
+	info.turret.canon = AddBody(canon);
+
+	// ---------
+
+	//Vertical joint
+	info.turret.verticalJoint = new btHingeConstraint(
+		*(info.turret.canon->body),
+		*(info.turret.turret->body),
+		btVector3(-info.turret.canonLength / 2, 0, 0),
+		btVector3(0, 0, 0),
+		btVector3(0,0,1),
+		btVector3(0, 0, 1));
+
+	info.turret.verticalJoint->setLimit(-0.01, 0.75);
+	world->addConstraint(info.turret.verticalJoint, true);
+	constraints.add(info.turret.verticalJoint);
+	info.turret.verticalJoint->setDbgDrawSize(2.0f);
+
+	//------------------------
 
 	PhysVehicle3D* pvehicle = new PhysVehicle3D(body, vehicle, info);
 	world->addVehicle(vehicle);

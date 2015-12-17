@@ -136,8 +136,8 @@ bool ModulePlayer::Start()
 	car.turret.turretRadius = car.chassis_size.y;
 	car.turret.turretOffset = -1.5f;
 
-	car.turret.canonLength = 10.0f;
-	car.turret.canonRadius = 0.5f;
+	car.turret.canonLength = 6.0f;
+	car.turret.canonRadius = 0.3f;
 
 	vehicle = App->physics->AddVehicle(car, 0, 4 ,10);
 	
