@@ -23,9 +23,15 @@ public:
 	bool CleanUp();
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
+	void LoadTowers();
+	void CheckTowersNumbers();
 
 public:
 	Cube s;
+
+	int allyTowers = 0;
+	int enemyTowers = 0;
+
 	p2DynArray<Tower*> towers;
 	PhysBody3D* sensor;
 };

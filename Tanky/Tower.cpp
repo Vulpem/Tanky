@@ -25,8 +25,9 @@ Tower::Tower(float x, float z, TOWER_TYPE newType, float height, float cubeSize)
 	}
 
 }
-void Tower::Update()
+bool Tower::Update()
 {
+	bool ret = true;
 	for (int i = 0; i < cubes.Count(); i++)
 	{
 		pbs[i]->GetTransform(&cubes[i]->transform);
@@ -38,8 +39,10 @@ void Tower::Update()
 		{
 			ChangeColor(Color{ 0.5f, 0.5f, 0.5f });
 			fallen = true;
+			ret = false;
 		}
 	}
+	return ret;
 }
 
 bool Tower::isDestroyed()

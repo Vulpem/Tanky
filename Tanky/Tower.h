@@ -17,7 +17,7 @@ class Tower
 public:
 	Tower();
 	Tower(float x, float z, TOWER_TYPE type, float height = 10, float cubeSize = 1);
-	void Update();
+	bool Update();
 
 	bool isDestroyed();
 	void ChangeColor(Color);
