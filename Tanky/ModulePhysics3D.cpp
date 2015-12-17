@@ -307,6 +307,8 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(VehicleInfo& info, float x, float y, 
 	body->setContactProcessingThreshold(BT_LARGE_FLOAT);
 	body->setActivationState(DISABLE_DEACTIVATION);
 
+
+
 	world->addRigidBody(body);
 
 	//Transform ---------------
@@ -332,14 +334,7 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(VehicleInfo& info, float x, float y, 
 
 		vehicle->addWheel(conn, dir, axis, info.wheels[i].suspensionRestLength, info.wheels[i].radius, tuning, info.wheels[i].front);
 	}
-	// ---------------------
 	
-
-	PhysVehicle3D* pvehicle = new PhysVehicle3D(body, vehicle, info);
-	world->addVehicle(vehicle);
-	vehicles.add(pvehicle);
-
-	pvehicle->SetPos(x, y, z);
 
 
 	//Turret --------------
@@ -347,8 +342,26 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(VehicleInfo& info, float x, float y, 
 	turret.SetPos(x+info.chassis_offset.x, y+info.chassis_offset.y + info.chassis_size.y * 0.5 + 1, z+info.chassis_offset.z + info.turret.turretOffset);
 	info.turret.turret = AddBody(turret);
 	
+	// ---------------------
+
+	//Horizontal joint
+	btHingeConstraint* hinge = new btHingeConstraint(
+		*(body),
+		*(info.turret.turret->body),
+		btVector3(info.chassis_offset.x, info.chassis_offset.y + info.chassis_size.y * 0.5 + 1, info.chassis_offset.z + info.turret.turretOffset),
+		btVector3(0,-1,0),
+		btVector3(0,1,0),
+		btVector3(0, 1, 0));
+	world->addConstraint(hinge);
+	constraints.add(hinge);
+	hinge->setDbgDrawSize(2.0f);
 
 
+	PhysVehicle3D* pvehicle = new PhysVehicle3D(body, vehicle, info);
+	world->addVehicle(vehicle);
+	vehicles.add(pvehicle);
+
+	pvehicle->SetPos(x, y, z);
 
 	return pvehicle;
 }
