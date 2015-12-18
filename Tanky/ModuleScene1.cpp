@@ -273,8 +273,10 @@ void ModuleScene1::CheckTowersNumbers()
 	}
 	else */if (enemyTowers == 0)
 	{
+		App->player->Disable();
 		App->scene_1->Disable();
 		App->scene_2->Enable();
+		App->player->Enable();
 	}
 }
 

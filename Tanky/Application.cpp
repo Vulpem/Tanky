@@ -52,7 +52,8 @@ bool Application::Init()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Init();
+		if (item->data->IsEnabled())
+			ret = item->data->Init();
 		item = item->next;
 	}
 
@@ -62,7 +63,8 @@ bool Application::Init()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Start();
+		if (item->data->IsEnabled())
+			ret = item->data->Start();
 		item = item->next;
 	}
 	
