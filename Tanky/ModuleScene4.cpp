@@ -11,7 +11,7 @@ ModuleScene4::ModuleScene4(Application* app, bool start_enabled) : ModuleScene(a
 
 void ModuleScene4::LoadPositions()
 {
-	neutralNum = 111;
+	neutralNum = 139;
 	neutralPositions = new vec4[neutralNum];
 #pragma region NeutralPositions
 	//HALL
@@ -147,6 +147,18 @@ void ModuleScene4::LoadPositions()
 	neutralPositions[108] = { 11, 1, 71, 2 };
 	neutralPositions[109] = { 13, 1, 71, 2 };
 
+	neutralPositions[110] = { 33, 0, 35, 3 };
+	neutralPositions[111] = { 35, 0, 35, 3 };
+	neutralPositions[112] = { 37, 0, 35, 3 };
+	neutralPositions[113] = { 39, 0, 35, 3 };
+	neutralPositions[114] = { 33, 0, 37, 3 };
+	neutralPositions[115] = { 33, 0, 39, 3 };
+	neutralPositions[116] = { 33, 0, 41, 3 };
+	neutralPositions[117] = { 33, 0, 43, 3 };
+	neutralPositions[118] = { 33, 0, 47, 3 };
+	neutralPositions[119] = { 33, 0, 49, 3 };
+	neutralPositions[118] = { 33, 0, 51, 3 };
+	neutralPositions[119] = { 33, 0, 53, 3 };
 
 #pragma endregion NeutralPositions
 
