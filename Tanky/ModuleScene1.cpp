@@ -269,10 +269,10 @@ void ModuleScene1::LoadTowers()
 	for (int i = 0; i < enemyMax; i++)
 	{
 		Tower* tower = new Tower((int)enemyPositions[i].x, (int)enemyPositions[i].y, (int)enemyPositions[i].z, TOWER_ENEMY, enemyPositions[i].w);
-		for (int j = 0; j < tower->cubes.Count(); j++)
+		for (int i = 0; i < tower->cubes.Count(); i++)
 		{
-			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[j]));
-			tower->pbs[j]->SetInactive();
+			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
+			tower->pbs[i]->SetInactive();
 		}
 		towers.PushBack(tower);
 		enemyTowers++;
@@ -286,10 +286,10 @@ void ModuleScene1::LoadTowers()
 	for (int i = 0; i < neutralMax; i++)
 	{
 		Tower* tower = new Tower((int)neutralPositions[i].x, (int)neutralPositions[i].y, (int)neutralPositions[i].z, TOWER_NEUTRAL, neutralPositions[i].w);
-		for (int j = 0; j < tower->cubes.Count(); j++)
+		for (int i = 0; i < tower->cubes.Count(); i++)
 		{
-			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[j], 0.0f));
-			tower->pbs[j]->SetInactive();
+			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i], 0.0f));
+			tower->pbs[i]->SetInactive();
 		}
 		towers.PushBack(tower);
 	}
