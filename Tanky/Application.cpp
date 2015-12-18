@@ -10,8 +10,8 @@ Application::Application()
 	scene_3 = new ModuleScene3(this, false);
 	scene_4 = new ModuleScene4(this, false);
 	scene_5 = new ModuleScene5(this, false);
-	scene_6 = new ModuleScene6(this, true);
-	scene_7 = new ModuleScene7(this, false);
+	scene_6 = new ModuleScene6(this, false);
+	scene_7 = new ModuleScene7(this, true);
 	scene_8 = new ModuleScene8(this, false);
 	scene_9 = new ModuleScene9(this, false);
 	scene_10 = new ModuleScene10(this, false);

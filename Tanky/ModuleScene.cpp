@@ -191,7 +191,7 @@ void ModuleScene::CheckTowersNumbers()
 		}
 
 	}
-	else if (allyNum > 0)
+	else if (allyNum > 0 && ended == false)
 	{
 		if (allyTowers < allyNum)
 		{
