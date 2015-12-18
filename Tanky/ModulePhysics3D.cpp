@@ -147,14 +147,14 @@ update_status ModulePhysics3D::Update(float dt)
 
 bool ModulePhysics3D::ClearVehicle(PhysVehicle3D* vehicle)
 {
-	world->removeConstraint(vehicle->info.turret.horizontalJoint);
+	/*world->removeConstraint(vehicle->info.turret.horizontalJoint);
 	world->removeConstraint(vehicle->info.turret.verticalJoint);
 	//world->removeRigidBody(vehicle->body);
 	//world->removeRigidBody(vehicle->info.turret.canon->body);
 	//world->removeRigidBody(vehicle->info.turret.turret->body);
 
 	delete vehicle;
-	vehicle = NULL;
+	vehicle = NULL;*/
 	return true;
 }
 
