@@ -100,7 +100,6 @@ update_status ModuleScene::Update(float dt)
 	
 	Plane p(0, 0, 0, 1);
 	p.axis = true;
-	p.color = Color{ 1, 1, 1, 1 };
 	p.Render();
 
 
