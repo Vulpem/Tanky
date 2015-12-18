@@ -157,93 +157,39 @@ update_status ModulePlayer::Update(float dt)
 {
 	turn = rightAcceleration = leftAcceleration = brake = 0.0f;
 
-	/*if (App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT && vehicle->GetKmh() < MAX_SPEED)
-	{
-		if (vehicle->GetLeftWheelSpeed() < 0.0f)
-		{
-			vehicle->ApplyLeftEngineForce(0);
-			vehicle->LeftBrake(BRAKE_POWER);
-		}
-		else
-		{
-			vehicle->ApplyLeftEngineForce(MAX_ACCELERATION);
-		}
-	}
-	else if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT && vehicle->GetKmh() > -MAX_SPEED)
-	{
-		if (vehicle->GetLeftWheelSpeed() > 0.0f)
-		{
-			vehicle->ApplyLeftEngineForce(0);
-			vehicle->LeftBrake(BRAKE_POWER);
-		}
-		else
-		{
-			vehicle->ApplyLeftEngineForce(-MAX_ACCELERATION);
-		}
-	}
-	else
-	{
-		vehicle->ApplyLeftEngineForce(0);
-		vehicle->LeftBrake(BRAKE_POWER);
-	}
 
 
-	if (App->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT && vehicle->GetKmh() < MAX_SPEED)
-	{
-		if (vehicle->GetRightWheelSpeed() < 0.0f)
-		{
-			vehicle->ApplyRightEngineForce(0);
-			vehicle->RightBrake(BRAKE_POWER);
-		}
-		else
-		{
-			vehicle->ApplyRightEngineForce(MAX_ACCELERATION);
-		}
-	}
-	else if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT && vehicle->GetKmh() > -MAX_SPEED)
-	{
-		if (vehicle->GetRightWheelSpeed() > 0.0f)
-		{
-			vehicle->ApplyRightEngineForce(0);
-			vehicle->RightBrake(BRAKE_POWER);
-		}
-		else
-		{
-			vehicle->ApplyRightEngineForce(-MAX_ACCELERATION);
-		}
-	}
-	else
-	{
-		vehicle->ApplyRightEngineForce(0);
-		vehicle->RightBrake(BRAKE_POWER);
-	}*/
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
-		vehicle->ApplyRightEngineForce(MAX_ACCELERATION);
-		vehicle->ApplyLeftEngineForce(MAX_ACCELERATION);
+		rightAcceleration += MAX_ACCELERATION;
+		leftAcceleration += MAX_ACCELERATION;
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-		vehicle->ApplyRightEngineForce(-MAX_ACCELERATION);
-		vehicle->ApplyLeftEngineForce(-MAX_ACCELERATION);
+		rightAcceleration -= MAX_ACCELERATION;
+		leftAcceleration -= MAX_ACCELERATION;
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-		vehicle->ApplyRightEngineForce(-MAX_ACCELERATION);
-		vehicle->ApplyLeftEngineForce(MAX_ACCELERATION);
+		rightAcceleration -= MAX_ACCELERATION * 4;
+		leftAcceleration += MAX_ACCELERATION * 4;
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
-		vehicle->ApplyRightEngineForce(MAX_ACCELERATION);
-		vehicle->ApplyLeftEngineForce(-MAX_ACCELERATION);
+		rightAcceleration += MAX_ACCELERATION * 4;
+		leftAcceleration -= MAX_ACCELERATION * 4;
 	}
-	else
-	{
-		vehicle->ApplyRightEngineForce(0);
-		vehicle->ApplyLeftEngineForce(0);
-		vehicle->RightBrake(BRAKE_POWER);
-		vehicle->LeftBrake(BRAKE_POWER);
-	}
+		vehicle->ApplyRightEngineForce(rightAcceleration);
+		vehicle->ApplyLeftEngineForce(leftAcceleration);
+
+		if (rightAcceleration == 0)
+		{
+			vehicle->RightBrake(BRAKE_POWER);
+		}
+		if (leftAcceleration == 0)
+		{
+			vehicle->LeftBrake(BRAKE_POWER);
+		}
 
 	vehicle->RotateTurret(TURRET_SPEED * App->input->GetMouseXMotion());
 	vehicle->RotateCanon(-CANON_SPEED * App->input->GetMouseYMotion());
