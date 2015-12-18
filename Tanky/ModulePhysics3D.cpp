@@ -363,7 +363,7 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(VehicleInfo& info, float x, float y, 
 	//Turret --------------
 	vec3 turretCenter;
 	turretCenter.x = x + info.chassis_offset.x;
-	turretCenter.y = y + info.chassis_offset.y + info.chassis_size.y * 0.5 + 1;
+	turretCenter.y = y + info.chassis_offset.y + info.chassis_size.y * 0.5f + 1.0f;
 	turretCenter.z = z + info.chassis_offset.z + info.turret.turretOffset;
 	Sphere turret(info.turret.turretRadius);
 	turret.SetPos(turretCenter.x, turretCenter.y, turretCenter.z);
