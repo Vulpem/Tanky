@@ -140,7 +140,7 @@ bool ModulePlayer::Start()
 	car.turret.canonRadius = 0.3f;
 
 	vehicle = App->physics->AddVehicle(car, 0, 4 ,10);
-	
+
 	return true;
 }
 

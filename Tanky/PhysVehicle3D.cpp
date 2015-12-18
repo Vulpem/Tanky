@@ -4,8 +4,6 @@
 // ----------------------------------------------------------------------------
 VehicleInfo::~VehicleInfo()
 {
-	//if(wheels != NULL)
-		//delete wheels;
 }
 
 // ----------------------------------------------------------------------------
@@ -16,6 +14,8 @@ PhysVehicle3D::PhysVehicle3D(btRigidBody* body, btRaycastVehicle* vehicle, const
 // ----------------------------------------------------------------------------
 PhysVehicle3D::~PhysVehicle3D()
 {
+	if (info.wheels != NULL)
+		delete[] info.wheels;
 	delete vehicle;
 }
 
