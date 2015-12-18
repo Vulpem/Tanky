@@ -217,7 +217,9 @@ update_status ModulePlayer::Update(float dt)
 		vehicle->ApplyRightEngineForce(0);
 		vehicle->RightBrake(BRAKE_POWER);
 	}
-
+	vehicle->RotateTurret(0.25 * App->input->GetMouseXMotion());
+	vehicle->RotateCanon(-0.1 * App->input->GetMouseYMotion());
+	/*
 	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_REPEAT)
 	{
 		vehicle->RotateTurret(-TURRET_SPEED * dt);
@@ -241,7 +243,7 @@ update_status ModulePlayer::Update(float dt)
 	else
 	{
 		vehicle->RotateCanon(0);
-	}
+	}*/
 
 	for (int n = 0; n < bullets.count(); n++)
 	{
