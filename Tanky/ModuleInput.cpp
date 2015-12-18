@@ -24,6 +24,8 @@ bool ModuleInput::Init()
 	bool ret = true;
 	SDL_Init(0);
 
+	SDL_ShowCursor(0);
+
 	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -113,6 +115,9 @@ update_status ModuleInput::PreUpdate(float dt)
 			}
 		}
 	}
+
+	SDL_WarpMouseInWindow(NULL, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	SDL_PollEvent(&e);
 
 	if(quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
 		return UPDATE_STOP;

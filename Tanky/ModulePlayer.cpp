@@ -217,8 +217,8 @@ update_status ModulePlayer::Update(float dt)
 		vehicle->ApplyRightEngineForce(0);
 		vehicle->RightBrake(BRAKE_POWER);
 	}
-	vehicle->RotateTurret(0.25 * App->input->GetMouseXMotion());
-	vehicle->RotateCanon(-0.1 * App->input->GetMouseYMotion());
+	vehicle->RotateTurret(TURRET_SPEED * App->input->GetMouseXMotion());
+	vehicle->RotateCanon(-CANON_SPEED * App->input->GetMouseYMotion());
 	/*
 	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_REPEAT)
 	{
@@ -268,7 +268,7 @@ update_status ModulePlayer::Update(float dt)
 
 update_status ModulePlayer::PostUpdate(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || App->input->GetMouseButton(1) == KEY_DOWN)
 	{
 		float tX, tY, tZ;
 		vehicle->info.turret.turret->GetPos(&tX, &tY, &tZ);
