@@ -2,6 +2,8 @@
 #include "Module.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include "p2List.h"
+
 
 struct PhysVehicle3D;
 
@@ -11,6 +13,9 @@ struct PhysVehicle3D;
 #define MAX_SPEED 15.0f
 # define TURRET_SPEED 45.0f
 # define CANON_SPEED 25.0f
+#define MAX_BULLETS 10
+#define BULLET_SPEED 60.0f
+#define BULLET_RADIUS 0.5f
 
 class ModulePlayer : public Module
 {
@@ -30,4 +35,6 @@ public:
 	float rightAcceleration;
 	float leftAcceleration;
 	float brake;
+
+	p2List<PhysBody3D*> bullets;
 };

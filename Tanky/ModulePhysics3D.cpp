@@ -137,7 +137,7 @@ update_status ModulePhysics3D::Update(float dt)
 	}
 
 	Cube cube;
-	cube.color = { 0.8f, 1.0f, 0.8f };
+	cube.color = { 0.07f, 0.8f, 0.16f };
 	cube.size = { 1000, 10, 1000 };
 	cube.SetPos(0, -5.1f, 0);
 	cube.Render();
@@ -145,12 +145,14 @@ update_status ModulePhysics3D::Update(float dt)
 	return UPDATE_CONTINUE;
 }
 
-void ModulePhysics3D::Shoot(vec3 position, vec3 direction, float force, float radius)
+PhysBody3D* ModulePhysics3D::Shoot(vec3 position, vec3 direction, float force, float radius)
 {
 	Sphere s(radius);
 	s.SetPos(position.x, position.y, position.z);
 	direction = direction/sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
-	AddBody(s)->Push(direction.x * force, direction.y * force, direction.z * force);
+	PhysBody3D* ret = AddBody(s);
+	ret->Push(direction.x * force, direction.y * force, direction.z * force);
+	return ret;
 }
 
 // ---------------------------------------------------------
@@ -430,6 +432,14 @@ void ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, c
 	world->addConstraint(hinge, disable_collision);
 	constraints.add(hinge);
 	hinge->setDbgDrawSize(2.0f);
+}
+
+void ModulePhysics3D::DeleteBody(PhysBody3D* body)
+{
+	bodies.del(bodies.findNode(body));
+	world->removeRigidBody(body->body);
+	delete body;
+	body = NULL;
 }
 
 // =============================================

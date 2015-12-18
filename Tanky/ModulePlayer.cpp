@@ -243,6 +243,17 @@ update_status ModulePlayer::Update(float dt)
 		vehicle->RotateCanon(0);
 	}
 
+	for (int n = 0; n < bullets.count(); n++)
+	{
+		Sphere bullet;
+		bullet.radius = BULLET_RADIUS;
+		float x, y, z;
+		PhysBody3D* data;
+		bullets.at(n, data);
+		data->GetPos(&x, &y, &z);
+		bullet.SetPos(x,y,z);
+		bullet.Render();
+	}
 
 	vehicle->Render();
 
@@ -267,8 +278,15 @@ update_status ModulePlayer::PostUpdate(float dt)
 		y = (tY - cY);
 		z = (tZ - cZ);
 
-		App->physics->Shoot({ cX - x, cY - y, cZ - z }, { -x, -y, -z }, 60.0f, 0.5f);
+		PhysBody3D* bullet = App->physics->Shoot({ cX - x, cY - y, cZ - z }, { -x, -y, -z }, BULLET_SPEED, BULLET_RADIUS);
 		vehicle->Push(x * 8000, y *100 - 20000, z * 8000);
+
+		bullets.add(bullet);
+		if (bullets.count() > MAX_BULLETS)
+		{
+			App->physics->DeleteBody(bullets.getFirst()->data);
+			bullets.del(bullets.getFirst());
+		}
 	}
 	return UPDATE_CONTINUE;
 }
