@@ -181,7 +181,17 @@ void ModuleScene::CheckTowersNumbers()
 	char title[164];
 	sprintf_s(title, "Tanky, the game!!   Enemies left: %i   Allies: %i", enemyTowers, allyTowers);
 
-	if (allyNum > 0)
+	if (enemyTowers == 0)
+	{
+		if (!ended)
+		{
+			timer.Start();
+			ended = true;
+			strcat_s(title, "     ----------  Level complete! :)  ----------");
+		}
+
+	}
+	else if (allyNum > 0)
 	{
 		if (allyTowers < allyNum)
 		{
@@ -194,17 +204,6 @@ void ModuleScene::CheckTowersNumbers()
 			}
 
 		}
-	}
-
-	if (enemyTowers == 0)
-	{
-		if (!ended)
-		{
-			timer.Start();
-			ended = true;
-			strcat_s(title, "     ----------  Level complete! :)  ----------");
-		}
-
 	}
 
 	App->window->SetTitle(title);
