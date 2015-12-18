@@ -31,7 +31,14 @@ bool ModuleScene1::Start()
 bool ModuleScene1::CleanUp()
 {
 	LOG("Unloading Intro scene");
-
+	for (int i = 0; i < towers.Count(); i++)
+	{
+		for (int j = 0; j < towers[i]->cubes.Count(); j++)
+		{
+			delete towers[i]->cubes[j];
+		}
+		towers[i]->cubes.Clear();
+	}
 	return true;
 }
 
