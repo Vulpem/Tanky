@@ -52,7 +52,7 @@ update_status ModuleCamera3D::Update(float dt)
 	btVector3 distanceVec(Position.x - x, Position.y - y, Position.z - z);
 	float distanceToVehicle = distanceVec.length();
 	
-	if (distanceToVehicle > maxDistanceToVehicle)
+	if (distanceToVehicle != maxDistanceToVehicle)
 	{
 		LOG("Vehicle out of distance");
 		btVector3FloatData data;
