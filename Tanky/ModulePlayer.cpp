@@ -17,7 +17,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
-	App->audio->PlayMusic("mus_core.wav");
+	App->audio->PlayMusic("mus_core.ogg");
 	looseMusic = App->audio->LoadFx("mus_loose.ogg");
 	shootMusic = App->audio->LoadFx("mus_shoot.ogg");
 
@@ -171,6 +171,7 @@ void ModulePlayer::Reset()
 		bullets.del(bullets.getFirst());
 	}
 	vehicle->SetPos(0, 0, 10);
+	vehicle->info.turret.canon->SetPos(0, 2, 10);
 }
 
 // Update: draw background
