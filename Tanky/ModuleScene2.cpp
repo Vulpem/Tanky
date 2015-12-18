@@ -263,8 +263,11 @@ void ModuleScene2::LoadTowers()
 	towers.PushBack(tower);
 	allyTowers++;
 	}
-	
-	delete[]allyPositions;
+	if (allyPositions)
+	{
+		delete[] allyPositions;
+		allyPositions = NULL;
+	}
 	//Enemies
 
 	for (int i = 0; i < enemyMax; i++)

@@ -279,6 +279,7 @@ void ModuleScene1::LoadTowers()
 	}
 	
 	delete[]enemyPositions;
+	enemyPositions = NULL;
 
 	//Neutrals
 
@@ -294,6 +295,7 @@ void ModuleScene1::LoadTowers()
 	}
 
 	delete[]neutralPositions;
+	neutralPositions = NULL;
 }
 
 void ModuleScene1::CheckTowersNumbers()
