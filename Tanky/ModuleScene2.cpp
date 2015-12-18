@@ -1,19 +1,19 @@
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleSceneIntro.h"
+#include "ModuleScene2.h"
 #include "Primitive.h"
 #include "PhysBody3D.h"
 
 
-ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleScene2::ModuleScene2(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
 
-ModuleSceneIntro::~ModuleSceneIntro()
+ModuleScene2::~ModuleScene2()
 {}
 
 // Load assets
-bool ModuleSceneIntro::Start()
+bool ModuleScene2::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
@@ -28,7 +28,7 @@ bool ModuleSceneIntro::Start()
 }
 
 // Load assets
-bool ModuleSceneIntro::CleanUp()
+bool ModuleScene2::CleanUp()
 {
 	LOG("Unloading Intro scene");
 
@@ -36,7 +36,7 @@ bool ModuleSceneIntro::CleanUp()
 }
 
 // Update
-update_status ModuleSceneIntro::Update(float dt)
+update_status ModuleScene2::Update(float dt)
 {
 	for (int i = 0; i < towers.Count(); i++)
 	{
@@ -56,39 +56,39 @@ update_status ModuleSceneIntro::Update(float dt)
 
 		}
 	}
-	
+
 	Plane p(0, 0, 0, 1);
 	p.axis = true;
-	p.color = Color{ 1, 1, 1 , 1};
+	p.color = Color{ 1, 1, 1, 1 };
 	p.Render();
-	
+
 
 	return UPDATE_CONTINUE;
 }
 
-void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
+void ModuleScene2::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
-//	LOG("Hit!");
+
 }
 
-void ModuleSceneIntro::LoadTowers()
+void ModuleScene2::LoadTowers()
 {
 	int neutralMax = 111;
 	neutralPositions = new vec4[neutralMax];
 #pragma region NeutralPositions
 	//HALL
 	//Behind Wall
-	neutralPositions[0] = { 1, 1, 1, 2};
-	neutralPositions[1] = { 3, 1, 1, 2};
-	neutralPositions[2] = { 5, 1, 1, 2};
-	neutralPositions[3] = { 7, 1, 1, 2};
-	neutralPositions[4] = { 9, 1, 1, 2};
+	neutralPositions[0] = { 1, 1, 1, 2 };
+	neutralPositions[1] = { 3, 1, 1, 2 };
+	neutralPositions[2] = { 5, 1, 1, 2 };
+	neutralPositions[3] = { 7, 1, 1, 2 };
+	neutralPositions[4] = { 9, 1, 1, 2 };
 	neutralPositions[5] = { 11, 1, 1, 2 };
-	neutralPositions[6] = { -1, 1, 1, 2};
-	neutralPositions[7] = { -3, 1, 1, 2};
-	neutralPositions[8] = { -5, 1, 1, 2};
-	neutralPositions[9] = { -7, 1, 1, 2};
-	neutralPositions[10] = { -9, 1, 1, 2};
+	neutralPositions[6] = { -1, 1, 1, 2 };
+	neutralPositions[7] = { -3, 1, 1, 2 };
+	neutralPositions[8] = { -5, 1, 1, 2 };
+	neutralPositions[9] = { -7, 1, 1, 2 };
+	neutralPositions[10] = { -9, 1, 1, 2 };
 	neutralPositions[11] = { -11, 1, 1, 2 };
 
 	//Left Wall
@@ -226,18 +226,18 @@ void ModuleSceneIntro::LoadTowers()
 	//Allies
 	for (int i = 0; i < 0; i++)
 	{
-		Tower* tower = new Tower((int)allyPositions[i].x, (int)allyPositions[i].y, (int)allyPositions[i].z, TOWER_ALLY, allyPositions[i].w);
-		for (int i = 0; i < tower->cubes.Count(); i++)
-		{
-			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
-			tower->pbs[i]->SetInactive();
-		}
-		towers.PushBack(tower);
-		allyTowers++;
+	Tower* tower = new Tower((int)allyPositions[i].x, (int)allyPositions[i].y, (int)allyPositions[i].z, TOWER_ALLY, allyPositions[i].w);
+	for (int i = 0; i < tower->cubes.Count(); i++)
+	{
+	tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
+	tower->pbs[i]->SetInactive();
+	}
+	towers.PushBack(tower);
+	allyTowers++;
 	}
 	*/
 	//Enemies
-	
+
 	for (int i = 0; i < enemyMax; i++)
 	{
 		Tower* tower = new Tower((int)enemyPositions[i].x, (int)enemyPositions[i].y, (int)enemyPositions[i].z, TOWER_ENEMY, enemyPositions[i].w);
@@ -249,7 +249,7 @@ void ModuleSceneIntro::LoadTowers()
 		towers.PushBack(tower);
 		enemyTowers++;
 	}
-	
+
 	//Neutrals
 
 	for (int i = 0; i < neutralMax; i++)
@@ -264,15 +264,15 @@ void ModuleSceneIntro::LoadTowers()
 	}
 }
 
-void ModuleSceneIntro::CheckTowersNumbers()
+void ModuleScene2::CheckTowersNumbers()
 {
 	LOG("Enemy towers: %i", enemyTowers);
 	/*
 	LOG("Ally towers: %i", allyTowers);
-	
+
 	if (allyTowers == 0)
 	{
-		LOG("YOU LOOSE");
+	LOG("YOU LOOSE");
 	}
 	else if (enemyTowers == 0)*/
 	{
