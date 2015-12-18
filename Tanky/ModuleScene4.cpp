@@ -11,7 +11,7 @@ ModuleScene4::ModuleScene4(Application* app, bool start_enabled) : ModuleScene(a
 
 void ModuleScene4::LoadPositions()
 {
-	neutralNum = 139;
+	neutralNum = 140;
 	neutralPositions = new vec4[neutralNum];
 #pragma region NeutralPositions
 	//HALL
@@ -147,18 +147,37 @@ void ModuleScene4::LoadPositions()
 	neutralPositions[108] = { 11, 1, 71, 2 };
 	neutralPositions[109] = { 13, 1, 71, 2 };
 
-	neutralPositions[110] = { 33, 0, 35, 3 };
-	neutralPositions[111] = { 35, 0, 35, 3 };
-	neutralPositions[112] = { 37, 0, 35, 3 };
-	neutralPositions[113] = { 39, 0, 35, 3 };
-	neutralPositions[114] = { 33, 0, 37, 3 };
-	neutralPositions[115] = { 33, 0, 39, 3 };
-	neutralPositions[116] = { 33, 0, 41, 3 };
-	neutralPositions[117] = { 33, 0, 43, 3 };
-	neutralPositions[118] = { 33, 0, 47, 3 };
-	neutralPositions[119] = { 33, 0, 49, 3 };
-	neutralPositions[118] = { 33, 0, 51, 3 };
-	neutralPositions[119] = { 33, 0, 53, 3 };
+	neutralPositions[110] = { 33, 0, 35, 4 };
+	neutralPositions[111] = { 35, 0, 35, 4 };
+	neutralPositions[112] = { 37, 0, 35, 4 };
+	neutralPositions[113] = { 39, 0, 35, 4 };
+	neutralPositions[114] = { 33, 0, 37, 4 };
+	neutralPositions[115] = { 33, 0, 39, 4 };
+	neutralPositions[116] = { 33, 0, 41, 4 };
+	neutralPositions[117] = { 33, 0, 43, 4 };
+	neutralPositions[118] = { 33, 0, 45, 4 };
+	neutralPositions[119] = { 33, 0, 47, 4 };
+	neutralPositions[120] = { 33, 0, 49, 4 };
+	neutralPositions[121] = { 33, 0, 51, 4 };
+	neutralPositions[122] = { 33, 0, 53, 4 };
+	neutralPositions[123] = { 35, 0, 53, 4 };
+	neutralPositions[124] = { 37, 0, 53, 4 };
+
+	neutralPositions[125] = { 33, 10, 35, 3 };
+	neutralPositions[126] = { 35, 10, 35, 3 };
+	neutralPositions[127] = { 37, 10, 35, 3 };
+	neutralPositions[128] = { 39, 10, 35, 3 };
+	neutralPositions[129] = { 33, 10, 37, 3 };
+	neutralPositions[130] = { 33, 10, 39, 3 };
+	neutralPositions[131] = { 33, 10, 41, 3 };
+	neutralPositions[132] = { 33, 10, 43, 3 };
+	neutralPositions[133] = { 33, 10, 45, 3 };
+	neutralPositions[134] = { 33, 10, 47, 3 };
+	neutralPositions[135] = { 33, 10, 49, 3 };
+	neutralPositions[136] = { 33, 10, 51, 3 };
+	neutralPositions[137] = { 33, 10, 53, 3 };
+	neutralPositions[138] = { 35, 10, 53, 3 };
+	neutralPositions[139] = { 37, 10, 53, 3 };
 
 #pragma endregion NeutralPositions
 
