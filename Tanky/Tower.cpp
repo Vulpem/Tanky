@@ -58,7 +58,11 @@ bool Tower::isDestroyed()
 
 		float distance = difX + difY + difZ;
 		if (distance > 3.0f)
+		{
 			blocksDown++;
+			cubes[i]->color = Color{ 0.5f, 0.5f, 0.5f };
+		}
+
 	}
 	if (blocksDown > pbs.Count() / 3 + 0.5)
 		return true;
