@@ -187,17 +187,25 @@ void ModuleScene::CheckTowersNumbers()
 	{
 		if (allyTowers == 0)
 		{
-			timer.Start();
-			ended = true;
-			strcat_s(title, "     Ally killed, you lost! What about it's family, eh? eh?");
+			if (!ended)
+			{
+				timer.Start();
+				ended = true;
+				strcat_s(title, "     Ally killed, you lost! What about it's family, eh? eh?");
+			}
+
 		}
 	}
 
-	else if (enemyTowers == 0)
+	if (enemyTowers == 0)
 	{
-		timer.Start();
-		ended = true;
-		strcat_s(title, "     Level complete! :)");
+		if (!ended)
+		{
+			timer.Start();
+			ended = true;
+			strcat_s(title, "     Level complete! :)");
+		}
+
 	}
 
 	App->window->SetTitle(title);
