@@ -19,6 +19,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	App->audio->PlayMusic("mus_core.ogg");
 	looseMusic = App->audio->LoadFx("mus_loose.ogg");
+	shootMusic = App->audio->LoadFx("mus_shoot.ogg");
 
 	if (vehicle == NULL)
 	{
@@ -235,6 +236,7 @@ update_status ModulePlayer::PostUpdate(float dt)
 {
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || App->input->GetMouseButton(1) == KEY_DOWN)
 	{
+		App->audio->PlayFx(shootMusic);
 		float tX, tY, tZ;
 		vehicle->info.turret.turret->GetPos(&tX, &tY, &tZ);
 		float cX, cY, cZ;
