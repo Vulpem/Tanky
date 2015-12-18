@@ -36,6 +36,7 @@ bool ModuleScene1::CleanUp()
 		for (int j = 0; j < towers[i]->cubes.Count(); j++)
 		{
 			delete towers[i]->cubes[j];
+			App->physics->DeleteBody(towers[i]->pbs[j]);
 		}
 		towers[i]->cubes.Clear();
 	}
