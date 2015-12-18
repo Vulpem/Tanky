@@ -283,6 +283,7 @@ void ModuleScene2::LoadTowers()
 	}
 
 	delete[]enemyPositions;
+	enemyPositions = NULL;
 	//Neutrals
 
 	for (int i = 0; i < neutralMax; i++)
@@ -297,6 +298,7 @@ void ModuleScene2::LoadTowers()
 	}
 
 	delete[]neutralPositions;
+	neutralPositions = NULL;
 }
 
 void ModuleScene2::CheckTowersNumbers()
