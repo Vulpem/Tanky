@@ -17,6 +17,9 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	lifes = LIFES;
+	char title[164];
+	sprintf_s(title, "Tanky, the game!!   Lives left: %i   Enemies left: %i   Allies: %i", lifes, App->scene_1->enemyTowers, App->scene_1->allyTowers);
+	App->window->SetTitle(title);
 	LOG("Loading player");
 	App->audio->PlayMusic("mus_core.ogg");
 	looseMusic = App->audio->LoadFx("mus_loose.ogg");
