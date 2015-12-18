@@ -20,6 +20,8 @@ bool ModuleScene::Start()
 
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
+	timer.Start();
+	timer.Stop();
 
 	LoadTowers();
 	LOG("%i", allyTowers);
@@ -47,7 +49,8 @@ bool ModuleScene::CleanUp()
 	{
 		delete[] allyPositions;
 		allyPositions = NULL;
-	}LOG("Unloading Intro scene");
+	}
+	
 	for (int i = 0; i < towers.Count(); i++)
 	{
 		for (int j = 0; j < towers[i]->cubes.Count(); j++)
@@ -83,12 +86,37 @@ update_status ModuleScene::Update(float dt)
 		}
 	}
 
+	if (ended && timer.Read() > 4 * 1000)
+	{
+		if (allyNum > 0 && allyTowers == 0)
+		{
+			reset = true; 
+		}
+		else if (enemyTowers <= 0)
+		{
+			loadNext = true;
+		}
+	}
+	
 	Plane p(0, 0, 0, 1);
 	p.axis = true;
 	p.color = Color{ 1, 1, 1, 1 };
 	p.Render();
 
 
+	return UPDATE_CONTINUE;
+}
+
+update_status ModuleScene::PostUpdate(float dt)
+{
+	if (reset)
+	{
+		ResetScene();
+	}
+	if (loadNext)
+	{
+		LoadNextScene();
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -114,11 +142,6 @@ void ModuleScene::LoadTowers()
 		towers.PushBack(tower);
 		allyTowers++;
 	}
-	if (allyPositions)
-	{
-		delete[] allyPositions;
-		allyPositions = NULL;
-	}
 	//Enemies
 
 	for (int i = 0; i < enemyNum; i++)
@@ -133,8 +156,6 @@ void ModuleScene::LoadTowers()
 		enemyTowers++;
 	}
 
-	delete[]enemyPositions;
-	enemyPositions = NULL;
 	//Neutrals
 
 	for (int i = 0; i < neutralNum; i++)
@@ -147,29 +168,39 @@ void ModuleScene::LoadTowers()
 		}
 		towers.PushBack(tower);
 	}
-
-	delete[]neutralPositions;
-	neutralPositions = NULL;
+	char title[80];
+	sprintf_s(title, "Tanky, the game!!   Enemies left: %i   Allies: %i  Km/h", enemyTowers, allyTowers);
+	App->window->SetTitle(title);
 }
 
 void ModuleScene::CheckTowersNumbers()
 {
-	LOG("Enemy towers: %i", enemyTowers);
+	//LOG("Enemy towers: %i", enemyTowers);
 
-	LOG("Ally towers: %i", allyTowers);
+	//LOG("Ally towers: %i", allyTowers);
+
+	char title[80];
+	sprintf_s(title, "Tanky, the game!!   Enemies left: %i   Allies: %i  Km/h", enemyTowers, allyTowers);
 
 	if (allyNum > 0)
 	{
 		if (allyTowers == 0)
 		{
-			ResetScene();
+			timer.Start();
+			ended = true;
+			strcat_s(title, "     Ally killed, you lost! What about it's family, eh? eh?");
 		}
 	}
 
 	else if (enemyTowers == 0)
 	{
-		LoadNextScene();
+		timer.Start();
+		ended = true;
+		strcat_s(title, "     Level complete! :)");
 	}
+
+	App->window->SetTitle(title);
+
 }
 
 

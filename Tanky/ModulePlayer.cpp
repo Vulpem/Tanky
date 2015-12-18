@@ -156,6 +156,8 @@ bool ModulePlayer::CleanUp()
 	}
 	vehicle->SetPos(0, 4, 10);
 
+	App->physics->ClearVehicle(vehicle);
+
 	return true;
 }
 
@@ -214,10 +216,6 @@ update_status ModulePlayer::Update(float dt)
 	}
 
 	vehicle->Render();
-
-	char title[80];
-	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
-	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
 }

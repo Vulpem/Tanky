@@ -6,8 +6,6 @@
 #include "PhysBody3D.h"
 #include "Tower.h"
 
-#define MAX_SNAKE 2
-
 struct PhysBody3D;
 struct PhysMotor3D;
 class Tower;

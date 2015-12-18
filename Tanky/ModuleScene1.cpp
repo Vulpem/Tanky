@@ -12,6 +12,7 @@ ModuleScene1::ModuleScene1(Application* app, bool start_enabled) : ModuleScene(a
 
 void ModuleScene1::LoadPositions()
 {
+	allyNum = 0;
 	neutralNum = 111;
 	neutralPositions = new vec4[neutralNum];
 #pragma region NeutralPositions

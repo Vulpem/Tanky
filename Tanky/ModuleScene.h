@@ -5,8 +5,7 @@
 #include "Primitive.h"
 #include "PhysBody3D.h"
 #include "Tower.h"
-
-#define MAX_SNAKE 2
+#include "Timer.h"
 
 struct PhysBody3D;
 struct PhysMotor3D;
@@ -20,6 +19,7 @@ public:
 
 	bool Start();
 	update_status Update(float dt);
+	update_status PostUpdate(float dt);
 	bool CleanUp();
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
@@ -35,16 +35,21 @@ public:
 public:
 	int allyTowers = 0;
 	int enemyTowers = 0;
+	bool ended = false;
+	bool reset = false;
+	bool loadNext = false;
 
-	int allyNum;
-	int enemyNum;
-	int neutralNum;
+	int allyNum = 0;
+	int enemyNum = 0;
+	int neutralNum = 0;
 
 	vec4* allyPositions = NULL;
 	vec4* enemyPositions = NULL;
 	vec4* neutralPositions = NULL;
 
+	Timer timer;
+
 	p2DynArray<Tower*> towers;
 
-	ModuleScene* nextScene;
+	ModuleScene* nextScene = NULL;
 };

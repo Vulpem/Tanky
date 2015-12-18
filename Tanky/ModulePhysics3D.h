@@ -57,6 +57,8 @@ private:
 	p2List<btDefaultMotionState*> motions;
 	p2List<btTypedConstraint*> constraints;
 	p2List<PhysVehicle3D*> vehicles;
+
+	btRigidBody* ground = NULL;
 };
 
 class DebugDrawer : public btIDebugDraw

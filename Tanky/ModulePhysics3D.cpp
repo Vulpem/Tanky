@@ -63,8 +63,8 @@ bool ModulePhysics3D::Start()
 		btDefaultMotionState* myMotionState = new btDefaultMotionState();
 		btRigidBody::btRigidBodyConstructionInfo rbInfo(0.0f, myMotionState, colShape);
 
-		btRigidBody* body = new btRigidBody(rbInfo);
-		world->addRigidBody(body);
+		ground = new btRigidBody(rbInfo);
+		world->addRigidBody(ground);
 	}
 
 	return true;
@@ -157,6 +157,8 @@ bool ModulePhysics3D::ClearVehicle(PhysVehicle3D* vehicle)
 	//world->removeRigidBody(vehicle->info.turret.turret->body);
 
 	delete vehicle;
+	delete vehicle_raycaster;
+	vehicles.clear();
 	vehicle = NULL;
 	return true;
 }
@@ -197,6 +199,12 @@ bool ModulePhysics3D::CleanUp()
 	
 	constraints.clear();
 
+	if (ground)
+	{
+		delete ground;
+		ground = NULL;
+	}
+
 	for(p2List_item<btDefaultMotionState*>* item = motions.getFirst(); item; item = item->next)
 		delete item->data;
 
@@ -215,9 +223,9 @@ bool ModulePhysics3D::CleanUp()
 	for(p2List_item<PhysVehicle3D*>* item = vehicles.getFirst(); item; item = item->next)
 		delete item->data;
 
-	vehicles.clear();
+	//vehicles.clear();
 
-	delete vehicle_raycaster;
+	//delete vehicle_raycaster;
 	delete world;
 
 	return true;
