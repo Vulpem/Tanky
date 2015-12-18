@@ -136,11 +136,11 @@ update_status ModulePhysics3D::Update(float dt)
 		}
 	}
 
-	Cube cube;
-	cube.color = { 0.07f, 0.8f, 0.16f };
-	cube.size = { 1000, 10, 1000 };
-	cube.SetPos(0, -5.1f, 0);
-	cube.Render();
+	Cube ground;
+	ground.color = { 0.07f, 0.8f, 0.16f };
+	ground.size = { 1000, 10, 1000 };
+	ground.SetPos(0, -5.1f, 0);
+	ground.Render();
 
 	return UPDATE_CONTINUE;
 }
@@ -153,8 +153,8 @@ bool ModulePhysics3D::ClearVehicle(PhysVehicle3D* vehicle)
 	if (vehicle->info.turret.verticalJoint)
 	world->removeConstraint(vehicle->info.turret.verticalJoint);
 	//world->removeRigidBody(vehicle->body);
-	//world->removeRigidBody(vehicle->info.turret.canon->body);
-	//world->removeRigidBody(vehicle->info.turret.turret->body);
+	world->removeRigidBody(vehicle->info.turret.canon->body);
+	world->removeRigidBody(vehicle->info.turret.turret->body);
 
 	delete vehicle;
 	delete vehicle_raycaster;

@@ -164,11 +164,11 @@ float PhysVehicle3D::GetRightWheelSpeed()
 
 void PhysVehicle3D::RotateTurret(float amount)
 {
-	info.turret.horizontalJoint->enableAngularMotor(true, amount, 1000);
+	info.turret.horizontalJoint->enableAngularMotor(true, amount, 100000);
 }
 void PhysVehicle3D::RotateCanon(float amount)
 {
-	info.turret.verticalJoint->enableAngularMotor(true, amount, 1000);
+	info.turret.verticalJoint->enableAngularMotor(true, amount, 100000);
 }
 
 void PhysVehicle3D::Fire()

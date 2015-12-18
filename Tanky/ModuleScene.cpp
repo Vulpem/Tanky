@@ -24,8 +24,8 @@ bool ModuleScene::Start()
 	timer.Stop();
 
 	LoadTowers();
-	LOG("%i", allyTowers);
-	LOG("%i", enemyTowers);
+	//LOG("%i", allyTowers);
+	//LOG("%i", enemyTowers);
 	return ret;
 }
 
@@ -136,10 +136,10 @@ void ModuleScene::LoadTowers()
 		Tower* tower = new Tower((int)allyPositions[i].x, (int)allyPositions[i].y, (int)allyPositions[i].z, TOWER_ALLY, allyPositions[i].w);
 		for (int i = 0; i < tower->cubes.Count(); i++)
 		{
-			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
-			tower->pbs[i]->SetInactive();
+			//tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
+			//tower->pbs[i]->SetInactive();
 		}
-		towers.PushBack(tower);
+		//towers.PushBack(tower);
 		allyTowers++;
 	}
 	//Enemies

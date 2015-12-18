@@ -235,7 +235,7 @@ update_status ModulePlayer::PostUpdate(float dt)
 		z = (tZ - cZ);
 
 		PhysBody3D* bullet = App->physics->Shoot({ cX - x, cY - y, cZ - z }, { -x, -y, -z }, BULLET_SPEED, BULLET_RADIUS);
-		vehicle->Push(x * 8000, y *100 - 20000, z * 8000);
+		vehicle->Push(x * 80000, y *10000 - 20000, z * 80000);
 
 		bullets.add(bullet);
 		if (bullets.count() > MAX_BULLETS)
