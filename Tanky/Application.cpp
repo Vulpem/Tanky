@@ -5,9 +5,9 @@ Application::Application()
 	window = new ModuleWindow(this);
 	input = new ModuleInput(this);
 //	audio = new ModuleAudio(this, true);
-	scene_1 = new ModuleScene1(this, true);
+	scene_1 = new ModuleScene1(this, false);
 	scene_2 = new ModuleScene2(this, false);
-	scene_3 = new ModuleScene3(this, false);
+	scene_3 = new ModuleScene3(this, true);
 	scene_4 = new ModuleScene4(this, false);
 	scene_5 = new ModuleScene5(this, false);
 	scene_6 = new ModuleScene6(this, false);
