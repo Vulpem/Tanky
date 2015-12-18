@@ -266,17 +266,15 @@ void ModuleScene1::LoadTowers()
 
 void ModuleScene1::CheckTowersNumbers()
 {
-	LOG("Enemy towers: %i", enemyTowers);
 	/*
-	LOG("Ally towers: %i", allyTowers);
-	
 	if (allyTowers == 0)
 	{
 		LOG("YOU LOOSE");
 	}
-	else if (enemyTowers == 0)*/
+	else */if (enemyTowers == 0)
 	{
-		LOG("YOU WIN!");
+		App->scene_1->CleanUp();
+		App->scene_2->Start();
 	}
 }
 
