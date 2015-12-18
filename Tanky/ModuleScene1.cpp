@@ -40,6 +40,7 @@ bool ModuleScene1::CleanUp()
 		}
 		towers[i]->cubes.Clear();
 	}
+	towers.Clear();
 	return true;
 }
 
