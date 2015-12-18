@@ -148,6 +148,11 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player");
+	while (bullets.count() > 0)
+	{
+		App->physics->DeleteBody(bullets.getFirst()->data);
+		bullets.del(bullets.getFirst());
+	}
 
 	return true;
 }
@@ -193,31 +198,6 @@ update_status ModulePlayer::Update(float dt)
 
 	vehicle->RotateTurret(TURRET_SPEED * App->input->GetMouseXMotion());
 	vehicle->RotateCanon(-CANON_SPEED * App->input->GetMouseYMotion());
-	/*
-	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_REPEAT)
-	{
-		vehicle->RotateTurret(-TURRET_SPEED * dt);
-	}
-	else if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT)
-	{
-		vehicle->RotateTurret(TURRET_SPEED * dt);
-	}
-	else
-	{
-		vehicle->RotateTurret(0);
-	}
-	if (App->input->GetKey(SDL_SCANCODE_Y) == KEY_REPEAT)
-	{
-		vehicle->RotateCanon(CANON_SPEED * dt);
-	}
-	else if (App->input->GetKey(SDL_SCANCODE_H) == KEY_REPEAT)
-	{
-		vehicle->RotateCanon(-CANON_SPEED * dt);
-	}
-	else
-	{
-		vehicle->RotateCanon(0);
-	}*/
 
 	for (int n = 0; n < bullets.count(); n++)
 	{
