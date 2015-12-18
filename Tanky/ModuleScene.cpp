@@ -59,6 +59,7 @@ bool ModuleScene::CleanUp()
 			App->physics->DeleteBody(towers[i]->pbs[j]);
 		}
 		towers[i]->cubes.Clear();
+		delete towers[i];
 	}
 	towers.Clear();
 	return true;
@@ -158,6 +159,7 @@ void ModuleScene::LoadTowers()
 	}
 
 	//Neutrals
+
 
 	for (int i = 0; i < neutralNum; i++)
 	{

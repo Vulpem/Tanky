@@ -16,7 +16,9 @@ PhysVehicle3D::~PhysVehicle3D()
 {
 	if (info.wheels != NULL)
 		delete[] info.wheels;
-	delete vehicle;
+
+
+	//delete vehicle;
 }
 
 // ----------------------------------------------------------------------------

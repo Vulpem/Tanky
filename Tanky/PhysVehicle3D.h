@@ -87,5 +87,4 @@ public:
 
 	VehicleInfo info;
 	btRaycastVehicle* vehicle;
-	//btSphereShape* turret;
 };

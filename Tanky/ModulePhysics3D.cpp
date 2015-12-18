@@ -147,19 +147,7 @@ update_status ModulePhysics3D::Update(float dt)
 
 bool ModulePhysics3D::ClearVehicle(PhysVehicle3D* vehicle)
 {
-	if (vehicle->info.turret.horizontalJoint)
-	world->removeConstraint(vehicle->info.turret.horizontalJoint);
 
-	if (vehicle->info.turret.verticalJoint)
-	world->removeConstraint(vehicle->info.turret.verticalJoint);
-	//world->removeRigidBody(vehicle->body);
-	world->removeRigidBody(vehicle->info.turret.canon->body);
-	world->removeRigidBody(vehicle->info.turret.turret->body);
-
-	delete vehicle;
-	//delete vehicle_raycaster;
-	//vehicles.clear();
-	App->player->vehicle = NULL;
 	return true;
 }
 
@@ -183,6 +171,11 @@ update_status ModulePhysics3D::PostUpdate(float dt)
 bool ModulePhysics3D::CleanUp()
 {
 	LOG("Destroying 3D Physics simulation");
+	if (App->player->vehicle->info.turret.horizontalJoint)
+		world->removeConstraint(App->player->vehicle->info.turret.horizontalJoint);
+
+	if (App->player->vehicle->info.turret.verticalJoint)
+		world->removeConstraint(App->player->vehicle->info.turret.verticalJoint);
 
 	// Remove from the world all collision bodies
 	for(int i = world->getNumCollisionObjects() - 1; i >= 0; i--)
@@ -223,9 +216,13 @@ bool ModulePhysics3D::CleanUp()
 	for(p2List_item<PhysVehicle3D*>* item = vehicles.getFirst(); item; item = item->next)
 		delete item->data;
 
-	//vehicles.clear();
+	//world->removeRigidBody(App->player->vehicle->body);
+	//world->removeRigidBody(App->player->vehicle->info.turret.canon->body);
+	//world->removeRigidBody(App->player->vehicle->info.turret.turret->body);
 
-	//delete vehicle_raycaster;
+	vehicles.clear();
+
+	delete vehicle_raycaster;
 	delete world;
 
 	return true;
