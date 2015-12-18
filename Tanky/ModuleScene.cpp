@@ -178,10 +178,6 @@ void ModuleScene::LoadTowers()
 
 void ModuleScene::CheckTowersNumbers()
 {
-	//LOG("Enemy towers: %i", enemyTowers);
-
-	//LOG("Ally towers: %i", allyTowers);
-
 	char title[164];
 	sprintf_s(title, "Tanky, the game!!   Enemies left: %i   Allies: %i  Km/h", enemyTowers, allyTowers);
 

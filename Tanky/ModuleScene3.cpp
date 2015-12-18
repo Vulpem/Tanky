@@ -164,6 +164,6 @@ void ModuleScene3::LoadPositions()
 	
 	allyNum = 2;
 	allyPositions = new vec4[allyNum];
-	allyPositions[0] = { 69, 6, 39, 5 };
-	allyPositions[1] = { -69, 6, 39, 5 };
+	allyPositions[0] = { 71, 6, 41, 5 };
+	allyPositions[1] = { -71, 6, 41, 5 };
 }
