@@ -157,9 +157,9 @@ bool ModulePhysics3D::ClearVehicle(PhysVehicle3D* vehicle)
 	world->removeRigidBody(vehicle->info.turret.turret->body);
 
 	delete vehicle;
-	delete vehicle_raycaster;
-	vehicles.clear();
-	vehicle = NULL;
+	//delete vehicle_raycaster;
+	//vehicles.clear();
+	App->player->vehicle = NULL;
 	return true;
 }
 

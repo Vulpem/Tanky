@@ -22,7 +22,7 @@ bool ModuleScene::Start()
 	App->camera->LookAt(vec3(0, 0, 0));
 	timer.Start();
 	timer.Stop();
-
+	loadNext = false;
 	LoadTowers();
 	//LOG("%i", allyTowers);
 	//LOG("%i", enemyTowers);
@@ -111,10 +111,12 @@ update_status ModuleScene::PostUpdate(float dt)
 	if (reset)
 	{
 		ResetScene();
+		reset = false;
 	}
 	if (loadNext)
 	{
 		LoadNextScene();
+		loadNext = false;
 	}
 	return UPDATE_CONTINUE;
 }
@@ -135,10 +137,10 @@ void ModuleScene::LoadTowers()
 		Tower* tower = new Tower((int)allyPositions[i].x, (int)allyPositions[i].y, (int)allyPositions[i].z, TOWER_ALLY, allyPositions[i].w);
 		for (int i = 0; i < tower->cubes.Count(); i++)
 		{
-			//tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
-			//tower->pbs[i]->SetInactive();
+			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
+			tower->pbs[i]->SetInactive();
 		}
-		//towers.PushBack(tower);
+		towers.PushBack(tower);
 		allyTowers++;
 	}
 	//Enemies
@@ -178,7 +180,7 @@ void ModuleScene::CheckTowersNumbers()
 
 	//LOG("Ally towers: %i", allyTowers);
 
-	char title[80];
+	char title[164];
 	sprintf_s(title, "Tanky, the game!!   Enemies left: %i   Allies: %i  Km/h", enemyTowers, allyTowers);
 
 	if (allyNum > 0)
@@ -206,20 +208,20 @@ void ModuleScene::CheckTowersNumbers()
 void ModuleScene::ResetScene()
 {
 	App->camera->Disable();
-	App->player->Disable();
 	this->Disable();
 	this->Enable();
-	App->player->Enable();
 	App->camera->Enable();
+
+	App->player->Reset();
 }
 void ModuleScene::LoadNextScene()
 {
 	App->camera->Disable();
-	App->player->Disable();
 	this->Disable();
 	nextScene->Enable();
-	App->player->Enable();
 	App->camera->Enable();
+
+	App->player->Reset();
 }
 
 void ModuleScene::SetNextScene(ModuleScene* scene)

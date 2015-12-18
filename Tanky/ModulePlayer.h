@@ -28,6 +28,8 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
+	void Reset();
+
 public:
 
 	PhysVehicle3D* vehicle;

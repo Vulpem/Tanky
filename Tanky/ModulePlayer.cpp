@@ -140,7 +140,11 @@ bool ModulePlayer::Start()
 		car.turret.canonLength = 6.0f;
 		car.turret.canonRadius = 0.3f;
 
-		vehicle = App->physics->AddVehicle(car, 0, 4, 10);
+		vehicle = App->physics->AddVehicle(car, 0, 0, 10);
+	}
+	else
+	{
+		vehicle->SetPos(0, 0, 10);
 	}
 	return true;
 }
@@ -149,16 +153,20 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player");
+
+	App->physics->ClearVehicle(vehicle);
+
+	return true;
+}
+
+void ModulePlayer::Reset()
+{
 	while (bullets.count() > 0)
 	{
 		App->physics->DeleteBody(bullets.getFirst()->data);
 		bullets.del(bullets.getFirst());
 	}
-	vehicle->SetPos(0, 4, 10);
-
-	App->physics->ClearVehicle(vehicle);
-
-	return true;
+	vehicle->SetPos(0, 0, 10);
 }
 
 // Update: draw background
