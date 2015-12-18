@@ -172,6 +172,7 @@ void ModulePlayer::Reset()
 	}
 	vehicle->SetPos(0, 0, 10);
 	vehicle->info.turret.canon->SetPos(0, 2, 10);
+	vehicle->info.turret.turret->SetPos(0, 2, 10);
 }
 
 // Update: draw background
