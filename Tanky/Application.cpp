@@ -7,6 +7,16 @@ Application::Application()
 //	audio = new ModuleAudio(this, true);
 	scene_1 = new ModuleScene1(this, true);
 	scene_2 = new ModuleScene2(this, false);
+	scene_3 = new ModuleScene3(this, false);
+	scene_4 = new ModuleScene4(this, false);
+	scene_5 = new ModuleScene5(this, false);
+	scene_6 = new ModuleScene6(this, false);
+	scene_7 = new ModuleScene7(this, false);
+	scene_8 = new ModuleScene8(this, false);
+	scene_9 = new ModuleScene9(this, false);
+	scene_10 = new ModuleScene10(this, false);
+	scene_end = new ModuleSceneEnd(this, false);
+
 	renderer3D = new ModuleRenderer3D(this);
 	camera = new ModuleCamera3D(this);
 	physics = new ModulePhysics3D(this);
@@ -26,12 +36,31 @@ Application::Application()
 	// Scenes
 	AddModule(scene_1);
 	AddModule(scene_2);
+	AddModule(scene_3);
+	AddModule(scene_4);
+	AddModule(scene_5);
+	AddModule(scene_6);
+	AddModule(scene_7);
+	AddModule(scene_8);
+	AddModule(scene_9);
+	AddModule(scene_10);
+	AddModule(scene_end);
+
 	AddModule(player);
 
 	// Renderer last!
 	AddModule(renderer3D);
 
 	scene_1->SetNextScene((ModuleScene*)scene_2);
+	scene_2->SetNextScene((ModuleScene*)scene_3);
+	scene_3->SetNextScene((ModuleScene*)scene_4);
+	scene_4->SetNextScene((ModuleScene*)scene_5);
+	scene_5->SetNextScene((ModuleScene*)scene_6);
+	scene_6->SetNextScene((ModuleScene*)scene_7);
+	scene_7->SetNextScene((ModuleScene*)scene_8);
+	scene_8->SetNextScene((ModuleScene*)scene_9);
+	scene_9->SetNextScene((ModuleScene*)scene_10);
+	scene_10->SetNextScene((ModuleScene*)scene_end);
 }
 
 Application::~Application()

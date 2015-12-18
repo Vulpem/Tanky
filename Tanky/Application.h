@@ -10,6 +10,15 @@
 #include "ModuleScene.h"
 #include "ModuleScene1.h"
 #include "ModuleScene2.h"
+#include "ModuleScene3.h"
+#include "ModuleScene4.h"
+#include "ModuleScene5.h"
+#include "ModuleScene6.h"
+#include "ModuleScene7.h"
+#include "ModuleScene8.h"
+#include "ModuleScene9.h"
+#include "ModuleScene10.h"
+#include "ModuleSceneEnd.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModulePhysics3D.h"
@@ -23,6 +32,16 @@ public:
 //	ModuleAudio* audio;
 	ModuleScene1* scene_1;
 	ModuleScene2* scene_2;
+	ModuleScene3* scene_3;
+	ModuleScene4* scene_4;
+	ModuleScene5* scene_5;
+	ModuleScene6* scene_6;
+	ModuleScene7* scene_7;
+	ModuleScene8* scene_8;
+	ModuleScene9* scene_9;
+	ModuleScene10* scene_10;
+	ModuleSceneEnd* scene_end;
+
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModulePhysics3D* physics;
