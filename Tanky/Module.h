@@ -17,6 +17,26 @@ public:
 	virtual ~Module()
 	{}
 
+	void Enable()
+	{
+		if (enabled == false)
+		{
+			enabled = true;
+			Start();
+		}
+	}
+
+	bool Disable()
+	{
+		bool ret = true;
+		if (enabled == true)
+		{
+			enabled = false;
+			ret = CleanUp();
+		}
+		return ret;
+	}
+
 	virtual bool Init() 
 	{
 		return true; 

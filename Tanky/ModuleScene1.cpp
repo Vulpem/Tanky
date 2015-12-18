@@ -273,8 +273,8 @@ void ModuleScene1::CheckTowersNumbers()
 	}
 	else */if (enemyTowers == 0)
 	{
-		App->scene_1->CleanUp();
-		App->scene_2->Start();
+		App->scene_1->Disable();
+		App->scene_2->Enable();
 	}
 }
 
