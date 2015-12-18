@@ -11,7 +11,7 @@ ModuleScene4::ModuleScene4(Application* app, bool start_enabled) : ModuleScene(a
 
 void ModuleScene4::LoadPositions()
 {
-	neutralNum = 140;
+	neutralNum = 170;
 	neutralPositions = new vec4[neutralNum];
 #pragma region NeutralPositions
 	//HALL
@@ -179,19 +179,55 @@ void ModuleScene4::LoadPositions()
 	neutralPositions[138] = { 35 + 40, 10, 53, 3 };
 	neutralPositions[139] = { 37 + 40, 10, 53, 3 };
 
+	neutralPositions[140] = { -33 - 40, 0, 35, 4 };
+	neutralPositions[141] = { -35 - 40, 0, 35, 4 };
+	neutralPositions[142] = { -37 - 40, 0, 35, 4 };
+	neutralPositions[143] = { -39 - 40, 0, 35, 4 };
+	neutralPositions[144] = { -33 - 40, 0, 37, 4 };
+	neutralPositions[145] = { -33 - 40, 0, 39, 4 };
+	neutralPositions[146] = { -33 - 40, 0, 41, 4 };
+	neutralPositions[147] = { -33 - 40, 0, 43, 4 };
+	neutralPositions[148] = { -33 - 40, 0, 45, 4 };
+	neutralPositions[149] = { -33 - 40, 0, 47, 4 };
+	neutralPositions[150] = { -33 - 40, 0, 49, 4 };
+	neutralPositions[151] = { -33 - 40, 0, 51, 4 };
+	neutralPositions[152] = { -33 - 40, 0, 53, 4 };
+	neutralPositions[153] = { -35 - 40, 0, 53, 4 };
+	neutralPositions[154] = { -37 - 40, 0, 53, 4 };
+
+	neutralPositions[155] = { -33 - 40, 10, 35, 3 };
+	neutralPositions[156] = { -35 - 40, 10, 35, 3 };
+	neutralPositions[157] = { -37 - 40, 10, 35, 3 };
+	neutralPositions[158] = { -39 - 40, 10, 35, 3 };
+	neutralPositions[159] = { -33 - 40, 10, 37, 3 };
+	neutralPositions[160] = { -33 - 40, 10, 39, 3 };
+	neutralPositions[161] = { -33 - 40, 10, 41, 3 };
+	neutralPositions[162] = { -33 - 40, 10, 43, 3 };
+	neutralPositions[163] = { -33 - 40, 10, 45, 3 };
+	neutralPositions[164] = { -33 - 40, 10, 47, 3 };
+	neutralPositions[165] = { -33 - 40, 10, 49, 3 };
+	neutralPositions[166] = { -33 - 40, 10, 51, 3 };
+	neutralPositions[167] = { -33 - 40, 10, 53, 3 };
+	neutralPositions[168] = { -35 - 40, 10, 53, 3 };
+	neutralPositions[169] = { -37 - 40, 10, 53, 3 };
+
 #pragma endregion NeutralPositions
 
-	enemyNum = 3;
+	enemyNum = 4;
 	enemyPositions = new vec4[enemyNum];
 	#pragma region EnemyPositions
 
-	enemyPositions[0] = { 9, 0, 67, 5 };
-	enemyPositions[1] = { 3, 0, 67, 5 };
-	enemyPositions[2] = { -9, 0, 67, 5 };
+	enemyPositions[0] = { 41 + 40, 0, 43, 8 };
+	enemyPositions[1] = { 41 + 40, 0, 49, 8 };
+
+	enemyPositions[2] = { -41 - 40, 0, 43, 8 };
+	enemyPositions[3] = { -41 - 40, 0, 49, 8 };
 
 #pragma endregion EnemyPositions
 
-	allyNum = 1;
+	allyNum = 2;
 	allyPositions = new vec4[allyNum];
-	allyPositions[0] = { -3, 0, 67, 5 };
+	allyPositions[0] = { 2, 0, 33, 5 };
+	allyPositions[1] = { -2, 0, 33, 5 };
+
 }
