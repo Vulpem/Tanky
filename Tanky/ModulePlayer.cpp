@@ -20,6 +20,7 @@ bool ModulePlayer::Start()
 	App->audio->PlayMusic("mus_core.ogg");
 	looseMusic = App->audio->LoadFx("mus_loose.ogg");
 	shootMusic = App->audio->LoadFx("mus_shoot.ogg");
+	cheerMusic = App->audio->LoadFx("mus_cheer.ogg");
 
 	if (vehicle == NULL)
 	{

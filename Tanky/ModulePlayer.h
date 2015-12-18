@@ -33,6 +33,7 @@ public:
 public:
 	unsigned int looseMusic;
 	unsigned int shootMusic;
+	unsigned int cheerMusic;
 
 	PhysVehicle3D* vehicle;
 	float turn;

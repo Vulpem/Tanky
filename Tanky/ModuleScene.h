@@ -29,6 +29,7 @@ public:
 
 	void ResetScene();
 	void LoadNextScene();
+	void SelectScene();
 
 	void SetNextScene(ModuleScene* scene);
 

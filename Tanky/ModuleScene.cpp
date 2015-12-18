@@ -23,9 +23,10 @@ bool ModuleScene::Start()
 	timer.Start();
 	timer.Stop();
 	loadNext = false;
+	ended = false;
+	loadNext = false;
+	reset = false;
 	LoadTowers();
-	//LOG("%i", allyTowers);
-	//LOG("%i", enemyTowers);
 	return ret;
 }
 
@@ -119,6 +120,7 @@ update_status ModuleScene::PostUpdate(float dt)
 		LoadNextScene();
 		loadNext = false;
 	}
+	SelectScene();
 	return UPDATE_CONTINUE;
 }
 
@@ -132,6 +134,8 @@ void ModuleScene::LoadPositions()
 void ModuleScene::LoadTowers()
 {
 	LoadPositions();
+	allyTowers = 0;
+	enemyTowers = 0;
 	//Allies
 	for (int i = 0; i < allyNum; i++)
 	{
@@ -178,36 +182,39 @@ void ModuleScene::LoadTowers()
 
 void ModuleScene::CheckTowersNumbers()
 {
-	char title[164];
-	sprintf_s(title, "Tanky, the game!!   Enemies left: %i   Allies: %i", enemyTowers, allyTowers);
-
-	if (enemyTowers == 0)
+	if (!ended)
 	{
-		if (!ended)
-		{
-			timer.Start();
-			ended = true;
-			strcat_s(title, "     ----------  Level complete! :)  ----------");
-		}
+		char title[164];
+		sprintf_s(title, "Tanky, the game!!   Enemies left: %i   Allies: %i", enemyTowers, allyTowers);
 
-	}
-	else if (allyNum > 0 && ended == false)
-	{
-		if (allyTowers < allyNum)
+		if (enemyTowers == 0)
 		{
 			if (!ended)
 			{
 				timer.Start();
 				ended = true;
-				strcat_s(title, "     ----------  Ally killed, you lost!  ----------");
-				App->audio->PlayFx(App->player->looseMusic);
+				strcat_s(title, "     ----------  Level complete! :)  ----------");
+				App->audio->PlayFx(App->player->cheerMusic);
 			}
 
 		}
+		else if (allyNum > 0 && ended == false)
+		{
+			if (allyTowers < allyNum)
+			{
+				if (!ended)
+				{
+					timer.Start();
+					ended = true;
+					strcat_s(title, "     ----------  Ally killed, you lost!  ----------");
+					App->audio->PlayFx(App->player->looseMusic);
+				}
+
+			}
+		}
+
+		App->window->SetTitle(title);
 	}
-
-	App->window->SetTitle(title);
-
 }
 
 
@@ -226,7 +233,6 @@ void ModuleScene::LoadNextScene()
 	this->Disable();
 	nextScene->Enable();
 	App->camera->Enable();
-
 	App->player->Reset();
 }
 
@@ -235,3 +241,86 @@ void ModuleScene::SetNextScene(ModuleScene* scene)
 	nextScene = scene;
 }
 
+void ModuleScene::SelectScene()
+{
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		App->camera->Disable();
+		this->Disable();
+		App->scene_1->Enable();
+		App->camera->Enable();
+		App->player->Reset();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		App->camera->Disable();
+		this->Disable();
+		App->scene_2->Enable();
+		App->camera->Enable();
+		App->player->Reset();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	{
+		App->camera->Disable();
+		this->Disable();
+		App->scene_3->Enable();
+		App->camera->Enable();
+		App->player->Reset();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+	{
+		App->camera->Disable();
+		this->Disable();
+		App->scene_4->Enable();
+		App->camera->Enable();
+		App->player->Reset();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
+	{
+		App->camera->Disable();
+		this->Disable();
+		App->scene_5->Enable();
+		App->camera->Enable();
+		App->player->Reset();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
+	{
+		App->camera->Disable();
+		this->Disable();
+		App->scene_6->Enable();
+		App->camera->Enable();
+		App->player->Reset();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_7) == KEY_DOWN)
+	{
+		App->camera->Disable();
+		this->Disable();
+		App->scene_7->Enable();
+		App->camera->Enable();
+		App->player->Reset();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
+	{
+		App->camera->Disable();
+		this->Disable();
+		App->scene_8->Enable();
+		App->camera->Enable();
+		App->player->Reset();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
+	{
+		App->camera->Disable();
+		this->Disable();
+		App->scene_9->Enable();
+		App->camera->Enable();
+		App->player->Reset();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+	{
+		App->camera->Disable();
+		this->Disable();
+		App->scene_end->Enable();
+		App->camera->Enable();
+		App->player->Reset();
+	}
+}

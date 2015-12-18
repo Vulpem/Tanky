@@ -17,7 +17,6 @@
 #include "ModuleScene7.h"
 #include "ModuleScene8.h"
 #include "ModuleScene9.h"
-#include "ModuleScene10.h"
 #include "ModuleSceneEnd.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
@@ -39,7 +38,6 @@ public:
 	ModuleScene7* scene_7;
 	ModuleScene8* scene_8;
 	ModuleScene9* scene_9;
-	ModuleScene10* scene_10;
 	ModuleSceneEnd* scene_end;
 
 	ModuleRenderer3D* renderer3D;

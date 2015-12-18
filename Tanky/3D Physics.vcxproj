@@ -83,7 +83,6 @@
     <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="ModuleScene.h" />
-    <ClInclude Include="ModuleScene10.h" />
     <ClInclude Include="ModuleScene2.h" />
     <ClInclude Include="ModuleScene3.h" />
     <ClInclude Include="ModuleScene4.h" />
@@ -122,7 +121,6 @@
     <ClCompile Include="ModuleRenderer3D.cpp" />
     <ClCompile Include="ModuleScene.cpp" />
     <ClCompile Include="ModuleScene1.cpp" />
-    <ClCompile Include="ModuleScene10.cpp" />
     <ClCompile Include="ModuleScene2.cpp" />
     <ClCompile Include="ModuleScene3.cpp" />
     <ClCompile Include="ModuleScene4.cpp" />
