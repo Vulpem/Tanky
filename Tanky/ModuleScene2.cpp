@@ -238,7 +238,7 @@ void ModuleScene2::LoadTowers()
 
 #pragma endregion NeutralPositions
 
-	int enemyMax = 4;
+	int enemyMax = 3;
 	enemyPositions = new vec4[enemyMax];
 #pragma region EnemyPositions
 
@@ -255,10 +255,10 @@ void ModuleScene2::LoadTowers()
 	for (int i = 0; i < alliesMax; i++)
 	{
 	Tower* tower = new Tower((int)allyPositions[i].x, (int)allyPositions[i].y, (int)allyPositions[i].z, TOWER_ALLY, allyPositions[i].w);
-	for (int i = 0; i < tower->cubes.Count(); i++)
+	for (int j = 0; j < tower->cubes.Count(); j++)
 	{
-	tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
-	tower->pbs[i]->SetInactive();
+	tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[j]));
+	tower->pbs[j]->SetInactive();
 	}
 	towers.PushBack(tower);
 	allyTowers++;
@@ -273,10 +273,10 @@ void ModuleScene2::LoadTowers()
 	for (int i = 0; i < enemyMax; i++)
 	{
 		Tower* tower = new Tower((int)enemyPositions[i].x, (int)enemyPositions[i].y, (int)enemyPositions[i].z, TOWER_ENEMY, enemyPositions[i].w);
-		for (int i = 0; i < tower->cubes.Count(); i++)
+		for (int j = 0; j < tower->cubes.Count(); j++)
 		{
-			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
-			tower->pbs[i]->SetInactive();
+			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[j]));
+			tower->pbs[j]->SetInactive();
 		}
 		towers.PushBack(tower);
 		enemyTowers++;
@@ -289,10 +289,10 @@ void ModuleScene2::LoadTowers()
 	for (int i = 0; i < neutralMax; i++)
 	{
 		Tower* tower = new Tower((int)neutralPositions[i].x, (int)neutralPositions[i].y, (int)neutralPositions[i].z, TOWER_NEUTRAL, neutralPositions[i].w);
-		for (int i = 0; i < tower->cubes.Count(); i++)
+		for (int j = 0; j < tower->cubes.Count(); j++)
 		{
-			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i], 0.0f));
-			tower->pbs[i]->SetInactive();
+			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[j], 0.0f));
+			tower->pbs[j]->SetInactive();
 		}
 		towers.PushBack(tower);
 	}
