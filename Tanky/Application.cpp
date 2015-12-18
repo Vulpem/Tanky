@@ -8,13 +8,13 @@ Application::Application()
 
 	player = new ModulePlayer(this);
 
-	scene_1 = new ModuleScene1(this, false);
+	scene_1 = new ModuleScene1(this, true);
 	scene_2 = new ModuleScene2(this, false);
 	scene_3 = new ModuleScene3(this, false);
 	scene_4 = new ModuleScene4(this, false);
 	scene_5 = new ModuleScene5(this, false);
 	scene_6 = new ModuleScene6(this, false);
-	scene_7 = new ModuleScene7(this, true);
+	scene_7 = new ModuleScene7(this, false);
 	scene_end = new ModuleSceneEnd(this, false);
 
 	renderer3D = new ModuleRenderer3D(this);
