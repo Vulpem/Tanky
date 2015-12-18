@@ -171,6 +171,10 @@ update_status ModulePhysics3D::PostUpdate(float dt)
 bool ModulePhysics3D::CleanUp()
 {
 	LOG("Destroying 3D Physics simulation");
+	world->removeRigidBody(ground);
+	delete ground;
+	ground = NULL;
+
 	if (App->player->vehicle->info.turret.horizontalJoint)
 		world->removeConstraint(App->player->vehicle->info.turret.horizontalJoint);
 
@@ -192,12 +196,6 @@ bool ModulePhysics3D::CleanUp()
 	
 	constraints.clear();
 
-	if (ground)
-	{
-		delete ground;
-		ground = NULL;
-	}
-
 	for(p2List_item<btDefaultMotionState*>* item = motions.getFirst(); item; item = item->next)
 		delete item->data;
 
@@ -216,6 +214,7 @@ bool ModulePhysics3D::CleanUp()
 	for(p2List_item<PhysVehicle3D*>* item = vehicles.getFirst(); item; item = item->next)
 		delete item->data;
 
+	
 	//world->removeRigidBody(App->player->vehicle->body);
 	//world->removeRigidBody(App->player->vehicle->info.turret.canon->body);
 	//world->removeRigidBody(App->player->vehicle->info.turret.turret->body);

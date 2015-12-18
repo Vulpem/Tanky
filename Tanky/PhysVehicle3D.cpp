@@ -18,7 +18,7 @@ PhysVehicle3D::~PhysVehicle3D()
 		delete[] info.wheels;
 
 
-	//delete vehicle;
+	delete vehicle;
 }
 
 // ----------------------------------------------------------------------------
