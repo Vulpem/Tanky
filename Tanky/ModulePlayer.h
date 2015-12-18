@@ -31,7 +31,7 @@ public:
 	void Reset();
 
 public:
-
+	unsigned int looseMusic;
 	PhysVehicle3D* vehicle;
 	float turn;
 	float rightAcceleration;

@@ -17,6 +17,9 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
+	App->audio->PlayMusic("mus_core.ogg");
+	looseMusic = App->audio->LoadFx("mus_loose.ogg");
+
 	if (vehicle == NULL)
 	{
 		VehicleInfo car;

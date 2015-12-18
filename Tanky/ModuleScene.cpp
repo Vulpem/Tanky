@@ -172,14 +172,14 @@ void ModuleScene::LoadTowers()
 		towers.PushBack(tower);
 	}
 	char title[80];
-	sprintf_s(title, "Tanky, the game!!   Enemies left: %i   Allies: %i  Km/h", enemyTowers, allyTowers);
+	sprintf_s(title, "Tanky, the game!!   Enemies left: %i   Allies: %i", enemyTowers, allyTowers);
 	App->window->SetTitle(title);
 }
 
 void ModuleScene::CheckTowersNumbers()
 {
 	char title[164];
-	sprintf_s(title, "Tanky, the game!!   Enemies left: %i   Allies: %i  Km/h", enemyTowers, allyTowers);
+	sprintf_s(title, "Tanky, the game!!   Enemies left: %i   Allies: %i", enemyTowers, allyTowers);
 
 	if (allyNum > 0)
 	{
@@ -189,7 +189,8 @@ void ModuleScene::CheckTowersNumbers()
 			{
 				timer.Start();
 				ended = true;
-				strcat_s(title, "     Ally killed, you lost! What about it's family, eh? eh?");
+				strcat_s(title, "     ----------  Ally killed, you lost!  ----------");
+				App->audio->PlayFx(App->player->looseMusic);
 			}
 
 		}
@@ -201,7 +202,7 @@ void ModuleScene::CheckTowersNumbers()
 		{
 			timer.Start();
 			ended = true;
-			strcat_s(title, "     Level complete! :)");
+			strcat_s(title, "     ----------  Level complete! :)  ----------");
 		}
 
 	}
