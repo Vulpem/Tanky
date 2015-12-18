@@ -32,12 +32,12 @@ void ModuleScene3::LoadPositions()
 	//Left Wall
 	neutralPositions[12] = { 11, 1, 3, 2 };
 	neutralPositions[13] = { 11, 1, 5, 2 };
-	neutralPositions[14] = { 11, 1, 7, 2 };
-	neutralPositions[15] = { 11, 1, 9, 2 };
-	neutralPositions[16] = { 11, 1, 11, 2 };
-	neutralPositions[17] = { 11, 1, 13, 2 };
-	neutralPositions[18] = { 11, 1, 15, 2 };
-	neutralPositions[19] = { 11, 1, 17, 2 };
+	neutralPositions[14] = { 11, 1, 7, 1 };
+	neutralPositions[15] = { 11, 1, 9, 1 };
+	neutralPositions[16] = { 11, 1, 11, 1 };
+	neutralPositions[17] = { 11, 1, 13, 1 };
+	neutralPositions[18] = { 11, 1, 15, 1 };
+	neutralPositions[19] = { 11, 1, 17, 1 };
 	neutralPositions[20] = { 11, 1, 19, 2 };
 	neutralPositions[21] = { 11, 1, 21, 2 };
 	neutralPositions[22] = { 11, 1, 23, 2 };
@@ -45,12 +45,12 @@ void ModuleScene3::LoadPositions()
 	//Right Wall
 	neutralPositions[23] = { -11, 1, 3, 2 };
 	neutralPositions[24] = { -11, 1, 5, 2 };
-	neutralPositions[25] = { -11, 1, 7, 2 };
-	neutralPositions[26] = { -11, 1, 9, 2 };
-	neutralPositions[27] = { -11, 1, 11, 2 };
-	neutralPositions[28] = { -11, 1, 13, 2 };
-	neutralPositions[29] = { -11, 1, 15, 2 };
-	neutralPositions[30] = { -11, 1, 17, 2 };
+	neutralPositions[25] = { -11, 1, 7, 1 };
+	neutralPositions[26] = { -11, 1, 9, 1 };
+	neutralPositions[27] = { -11, 1, 11, 1 };
+	neutralPositions[28] = { -11, 1, 13, 1 };
+	neutralPositions[29] = { -11, 1, 15, 1 };
+	neutralPositions[30] = { -11, 1, 17, 1 };
 	neutralPositions[31] = { -11, 1, 19, 2 };
 	neutralPositions[32] = { -11, 1, 21, 2 };
 	neutralPositions[33] = { -11, 1, 23, 2 };
@@ -80,9 +80,9 @@ void ModuleScene3::LoadPositions()
 	neutralPositions[52] = { 7, 1, 53, 2 };
 	neutralPositions[53] = { 7, 1, 55, 2 };
 	neutralPositions[54] = { 7, 1, 57, 2 };
-	neutralPositions[55] = { 7, 1, 59, 2 };
-	neutralPositions[56] = { 7, 1, 61, 2 };
-	neutralPositions[57] = { 7, 1, 63, 2 };
+	neutralPositions[55] = { 7, 1, 59, 1 };
+	neutralPositions[56] = { 7, 1, 61, 1 };
+	neutralPositions[57] = { 7, 1, 63, 1 };
 
 	//Passage Right
 	neutralPositions[58] = { -7, 1, 25, 2 };
@@ -102,20 +102,20 @@ void ModuleScene3::LoadPositions()
 	neutralPositions[72] = { -7, 1, 53, 2 };
 	neutralPositions[73] = { -7, 1, 55, 2 };
 	neutralPositions[74] = { -7, 1, 57, 2 };
-	neutralPositions[75] = { -7, 1, 59, 2 };
-	neutralPositions[76] = { -7, 1, 61, 2 };
-	neutralPositions[77] = { -7, 1, 63, 2 };
+	neutralPositions[75] = { -7, 1, 59, 1 };
+	neutralPositions[76] = { -7, 1, 61, 1 };
+	neutralPositions[77] = { -7, 1, 63, 1 };
 
 	//End Start
-	neutralPositions[78] = { -7, 1, 63, 2 };
-	neutralPositions[79] = { -9, 1, 63, 2 };
-	neutralPositions[80] = { -11, 1, 63, 2 };
+	neutralPositions[78] = { -7, 1, 63, 1 };
+	neutralPositions[79] = { -9, 1, 63, 1 };
+	neutralPositions[80] = { -11, 1, 63, 1 };
 	neutralPositions[81] = { -13, 1, 63, 2 };
 	neutralPositions[82] = { -15, 1, 63, 2 };
 
-	neutralPositions[83] = { 7, 1, 63, 2 };
-	neutralPositions[84] = { 9, 1, 63, 2 };
-	neutralPositions[85] = { 11, 1, 63, 2 };
+	neutralPositions[83] = { 7, 1, 63, 1 };
+	neutralPositions[84] = { 9, 1, 63, 1 };
+	neutralPositions[85] = { 11, 1, 63, 1 };
 	neutralPositions[86] = { 13, 1, 63, 2 };
 	neutralPositions[87] = { 15, 1, 63, 2 };
 
