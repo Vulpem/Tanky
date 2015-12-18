@@ -71,7 +71,7 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
-
+	totalTimer.Start();
 	// Call Init() in all modules
 	p2List_item<Module*>* item = list_modules.getFirst();
 

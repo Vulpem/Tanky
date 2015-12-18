@@ -52,6 +52,7 @@ public:
 	Application();
 	~Application();
 
+	Timer totalTimer;
 	bool Init();
 	update_status Update();
 	bool CleanUp();

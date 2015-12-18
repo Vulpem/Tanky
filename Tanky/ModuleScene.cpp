@@ -241,11 +241,21 @@ void ModuleScene::ResetScene()
 }
 void ModuleScene::LoadNextScene()
 {
-	App->camera->Disable();
-	this->Disable();
-	nextScene->Enable();
-	App->camera->Enable();
-	App->player->Reset();
+	if (this != App->scene_end)
+	{
+		App->camera->Disable();
+		this->Disable();
+		nextScene->Enable();
+		App->camera->Enable();
+		App->player->Reset();
+	}
+	else
+	{
+		char title[164];
+		int time = ceil(App->totalTimer.Read()/1000.0f);
+		sprintf_s(title, "You've beaten Tanky, the game!!  You've only wasted %04i seconds of your life!!", time);
+		App->window->SetTitle(title);
+	}
 }
 
 void ModuleScene::SetNextScene(ModuleScene* scene)
