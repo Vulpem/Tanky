@@ -111,12 +111,6 @@
     <ClInclude Include="ModuleScene7.h">
       <Filter>Sources\Modules\Game</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleScene8.h">
-      <Filter>Sources\Modules\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleScene9.h">
-      <Filter>Sources\Modules\Game</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -198,12 +192,6 @@
       <Filter>Sources\Modules\Game</Filter>
     </ClCompile>
     <ClCompile Include="ModuleScene7.cpp">
-      <Filter>Sources\Modules\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleScene8.cpp">
-      <Filter>Sources\Modules\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleScene9.cpp">
       <Filter>Sources\Modules\Game</Filter>
     </ClCompile>
   </ItemGroup>

@@ -15,8 +15,6 @@ Application::Application()
 	scene_5 = new ModuleScene5(this, false);
 	scene_6 = new ModuleScene6(this, false);
 	scene_7 = new ModuleScene7(this, true);
-	scene_8 = new ModuleScene8(this, false);
-	scene_9 = new ModuleScene9(this, false);
 	scene_end = new ModuleSceneEnd(this, false);
 
 	renderer3D = new ModuleRenderer3D(this);
@@ -42,8 +40,6 @@ Application::Application()
 	AddModule(scene_5);
 	AddModule(scene_6);
 	AddModule(scene_7);
-	AddModule(scene_8);
-	AddModule(scene_9);
 	AddModule(scene_end);
 
 	AddModule(player);
@@ -57,9 +53,8 @@ Application::Application()
 	scene_4->SetNextScene((ModuleScene*)scene_5);
 	scene_5->SetNextScene((ModuleScene*)scene_6);
 	scene_6->SetNextScene((ModuleScene*)scene_7);
-	scene_7->SetNextScene((ModuleScene*)scene_8);
-	scene_8->SetNextScene((ModuleScene*)scene_9);
-	scene_9->SetNextScene((ModuleScene*)scene_end);
+	scene_7->SetNextScene((ModuleScene*)scene_end);
+	scene_end->SetNextScene((ModuleScene*)scene_1);
 }
 
 Application::~Application()

@@ -173,7 +173,7 @@ void ModuleSceneEnd::LoadPositions()
 
 	for (; n < 150; n++)
 	{
-		enemyPositions[n] = { 80, 10, 40, 1 };
+		enemyPositions[n] = { -40, 10, 40, 1 };
 	}
 
 

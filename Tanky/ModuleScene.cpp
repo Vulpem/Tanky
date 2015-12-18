@@ -315,22 +315,6 @@ void ModuleScene::SelectScene()
 	{
 		App->camera->Disable();
 		this->Disable();
-		App->scene_8->Enable();
-		App->camera->Enable();
-		App->player->Reset();
-	}
-	if (App->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
-	{
-		App->camera->Disable();
-		this->Disable();
-		App->scene_9->Enable();
-		App->camera->Enable();
-		App->player->Reset();
-	}
-	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
-	{
-		App->camera->Disable();
-		this->Disable();
 		App->scene_end->Enable();
 		App->camera->Enable();
 		App->player->Reset();
