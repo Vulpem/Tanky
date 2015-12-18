@@ -218,17 +218,18 @@ void ModuleScene1::LoadTowers()
 	neutralPositions[108] = { 11, 1, 71, 2 };
 	neutralPositions[109] = { 13, 1, 71, 2 };
 
-
 #pragma endregion NeutralPositions
 
 	int enemyMax = 4;
 	enemyPositions = new vec4[enemyMax];
 #pragma region EnemyPositions
 
-	enemyPositions[0] = { 9, 1, 67, 5 };
-	enemyPositions[1] = { 3, 1, 67, 5 };
-	enemyPositions[2] = { -3, 1, 67, 5 };
-	enemyPositions[3] = { -9, 1, 67, 5 };
+	enemyPositions[0] = { 9, 0, 67, 5 };
+	enemyPositions[1] = { 3, 0, 67, 5 };
+	enemyPositions[2] = { -3, 0, 67, 5 };
+	enemyPositions[3] = { -9, 0, 67, 5 };
+
+
 
 #pragma endregion EnemyPositions
 	/*
@@ -259,6 +260,8 @@ void ModuleScene1::LoadTowers()
 		enemyTowers++;
 	}
 	
+	delete[]enemyPositions;
+
 	//Neutrals
 
 	for (int i = 0; i < neutralMax; i++)
@@ -271,6 +274,8 @@ void ModuleScene1::LoadTowers()
 		}
 		towers.PushBack(tower);
 	}
+
+	delete[]neutralPositions;
 }
 
 void ModuleScene1::CheckTowersNumbers()
@@ -282,10 +287,12 @@ void ModuleScene1::CheckTowersNumbers()
 	}
 	else */if (enemyTowers == 0)
 	{
+		App->camera->Disable();
 		App->player->Disable();
 		App->scene_1->Disable();
 		App->scene_2->Enable();
 		App->player->Enable();
+		App->camera->Enable();
 	}
 }
 

@@ -216,15 +216,17 @@ void ModuleScene2::LoadTowers()
 	enemyPositions = new vec4[enemyMax];
 #pragma region EnemyPositions
 
-	enemyPositions[0] = { 9, 1, 67, 5 };
-	enemyPositions[1] = { 3, 1, 67, 5 };
-	enemyPositions[2] = { -3, 1, 67, 5 };
-	enemyPositions[3] = { -9, 1, 67, 5 };
+	enemyPositions[0] = { 9, 0, 67, 5 };
+	enemyPositions[1] = { 3, 0, 67, 5 };
+	enemyPositions[2] = { -9, 0, 67, 5 };
 
 #pragma endregion EnemyPositions
-	/*
+	
+	int alliesMax = 1;
+	allyPositions = new vec4[alliesMax];
+	allyPositions[0] = { -3, 0, 67, 5 };
 	//Allies
-	for (int i = 0; i < 0; i++)
+	for (int i = 0; i < alliesMax; i++)
 	{
 	Tower* tower = new Tower((int)allyPositions[i].x, (int)allyPositions[i].y, (int)allyPositions[i].z, TOWER_ALLY, allyPositions[i].w);
 	for (int i = 0; i < tower->cubes.Count(); i++)
@@ -235,7 +237,8 @@ void ModuleScene2::LoadTowers()
 	towers.PushBack(tower);
 	allyTowers++;
 	}
-	*/
+	
+	delete[]allyPositions;
 	//Enemies
 
 	for (int i = 0; i < enemyMax; i++)
@@ -250,6 +253,7 @@ void ModuleScene2::LoadTowers()
 		enemyTowers++;
 	}
 
+	delete[]enemyPositions;
 	//Neutrals
 
 	for (int i = 0; i < neutralMax; i++)
@@ -262,19 +266,21 @@ void ModuleScene2::LoadTowers()
 		}
 		towers.PushBack(tower);
 	}
+
+	delete[]neutralPositions;
 }
 
 void ModuleScene2::CheckTowersNumbers()
 {
 	LOG("Enemy towers: %i", enemyTowers);
-	/*
+	
 	LOG("Ally towers: %i", allyTowers);
 
 	if (allyTowers == 0)
 	{
 	LOG("YOU LOOSE");
 	}
-	else if (enemyTowers == 0)*/
+	else if (enemyTowers == 0)
 	{
 		LOG("YOU WIN!");
 	}
