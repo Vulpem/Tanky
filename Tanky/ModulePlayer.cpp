@@ -17,7 +17,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
-	App->audio->PlayMusic("mus_core.ogg");
+	App->audio->PlayMusic("mus_core.wav");
 	looseMusic = App->audio->LoadFx("mus_loose.ogg");
 	shootMusic = App->audio->LoadFx("mus_shoot.ogg");
 
