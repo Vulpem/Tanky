@@ -175,8 +175,8 @@ void ModuleScene::LoadTowers()
 		}
 		towers.PushBack(tower);
 	}
-	char title[80];
-	sprintf_s(title, "Tanky, the game!!   Enemies left: %i   Allies: %i", enemyTowers, allyTowers);
+	char title[164];
+	sprintf_s(title, "Tanky, the game!!   Lives left: %i   Enemies left: %i   Allies: %i", App->player->lifes, enemyTowers, allyTowers);
 	App->window->SetTitle(title);
 }
 
@@ -185,7 +185,7 @@ void ModuleScene::CheckTowersNumbers()
 	if (!ended)
 	{
 		char title[164];
-		sprintf_s(title, "Tanky, the game!!   Enemies left: %i   Allies: %i", enemyTowers, allyTowers);
+		sprintf_s(title, "Tanky, the game!!   Lives left: %i   Enemies left: %i   Allies: %i", App->player->lifes, enemyTowers, allyTowers);
 
 		if (enemyTowers == 0)
 		{
@@ -206,7 +206,12 @@ void ModuleScene::CheckTowersNumbers()
 				{
 					timer.Start();
 					ended = true;
+					App->player->lifes--;
 					strcat_s(title, "     ----------  Ally killed, you lost!  ----------");
+					if (App->player->lifes == 0)
+					{
+						sprintf_s(title, "-------------         YOU LOST.      BETTER LUCK NEXT TIME   :)         -------------");
+					}
 					App->audio->PlayFx(App->player->looseMusic);
 				}
 
@@ -222,9 +227,16 @@ void ModuleScene::ResetScene()
 {
 	App->camera->Disable();
 	this->Disable();
-	this->Enable();
+	if (App->player->lifes == 0)
+	{
+		App->player->lifes = LIFES;
+		App->scene_1->Enable();
+	}
+	else
+	{
+		this->Enable();
+	}
 	App->camera->Enable();
-
 	App->player->Reset();
 }
 void ModuleScene::LoadNextScene()

@@ -129,11 +129,6 @@ update_status ModulePhysics3D::Update(float dt)
 			item->data->Render();
 			item = item->next;
 		}
-
-		if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-		{
-			Shoot({ App->camera->Position.x, App->camera->Position.y, App->camera->Position.z }, { -(App->camera->Z.x), -(App->camera->Z.y), -(App->camera->Z.z) }, 30.0f, 1.0f);
-		}
 	}
 
 	Cube ground;

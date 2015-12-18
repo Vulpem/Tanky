@@ -35,6 +35,8 @@ public:
 	unsigned int shootMusic;
 	unsigned int cheerMusic;
 
+	uint lifes;
+
 	PhysVehicle3D* vehicle;
 	float turn;
 	float rightAcceleration;

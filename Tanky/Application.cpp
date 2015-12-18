@@ -5,6 +5,9 @@ Application::Application()
 	window = new ModuleWindow(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this, true);
+
+	player = new ModulePlayer(this);
+
 	scene_1 = new ModuleScene1(this, false);
 	scene_2 = new ModuleScene2(this, false);
 	scene_3 = new ModuleScene3(this, false);
@@ -19,7 +22,6 @@ Application::Application()
 	renderer3D = new ModuleRenderer3D(this);
 	camera = new ModuleCamera3D(this);
 	physics = new ModulePhysics3D(this);
-	player = new ModulePlayer(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order

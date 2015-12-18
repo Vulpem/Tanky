@@ -16,6 +16,7 @@ ModulePlayer::~ModulePlayer()
 // Load assets
 bool ModulePlayer::Start()
 {
+	lifes = LIFES;
 	LOG("Loading player");
 	App->audio->PlayMusic("mus_core.ogg");
 	looseMusic = App->audio->LoadFx("mus_loose.ogg");
