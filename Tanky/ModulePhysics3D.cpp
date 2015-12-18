@@ -145,6 +145,19 @@ update_status ModulePhysics3D::Update(float dt)
 	return UPDATE_CONTINUE;
 }
 
+bool ModulePhysics3D::ClearVehicle(PhysVehicle3D* vehicle)
+{
+	world->removeConstraint(vehicle->info.turret.horizontalJoint);
+	world->removeConstraint(vehicle->info.turret.verticalJoint);
+	//world->removeRigidBody(vehicle->body);
+	//world->removeRigidBody(vehicle->info.turret.canon->body);
+	//world->removeRigidBody(vehicle->info.turret.turret->body);
+
+	delete vehicle;
+	vehicle = NULL;
+	return true;
+}
+
 PhysBody3D* ModulePhysics3D::Shoot(vec3 position, vec3 direction, float force, float radius)
 {
 	Sphere s(radius);

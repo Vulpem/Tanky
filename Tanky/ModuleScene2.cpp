@@ -31,7 +31,33 @@ bool ModuleScene2::Start()
 bool ModuleScene2::CleanUp()
 {
 	LOG("Unloading Intro scene");
+	if (neutralPositions)
+	{
+		delete[] neutralPositions;
+		neutralPositions = NULL;
+	}
 
+	if (enemyPositions)
+	{
+		delete[] enemyPositions;
+		enemyPositions = NULL;
+	}
+
+	if (allyPositions)
+	{
+		delete[] allyPositions;
+		allyPositions = NULL;
+	}LOG("Unloading Intro scene");
+	for (int i = 0; i < towers.Count(); i++)
+	{
+		for (int j = 0; j < towers[i]->cubes.Count(); j++)
+		{
+			delete towers[i]->cubes[j];
+			App->physics->DeleteBody(towers[i]->pbs[j]);
+		}
+		towers[i]->cubes.Clear();
+	}
+	towers.Clear();
 	return true;
 }
 

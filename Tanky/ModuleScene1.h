@@ -30,9 +30,9 @@ public:
 	int allyTowers = 0;
 	int enemyTowers = 0;
 
-	vec4* allyPositions;
-	vec4* enemyPositions;
-	vec4* neutralPositions;
+	vec4* allyPositions = NULL;
+	vec4* enemyPositions = NULL;
+	vec4* neutralPositions = NULL;
 
 	p2DynArray<Tower*> towers;
 };

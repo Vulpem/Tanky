@@ -154,6 +154,8 @@ bool ModulePlayer::CleanUp()
 		bullets.del(bullets.getFirst());
 	}
 
+	App->physics->ClearVehicle(vehicle);
+
 	return true;
 }
 

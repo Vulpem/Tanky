@@ -30,6 +30,24 @@ bool ModuleScene1::Start()
 // Load assets
 bool ModuleScene1::CleanUp()
 {
+	if (neutralPositions)
+	{
+		delete[] neutralPositions;
+		neutralPositions = NULL;
+	}
+
+	if (enemyPositions)
+	{
+		delete[] enemyPositions;
+		enemyPositions = NULL;
+	}
+
+	if (allyPositions)
+	{
+		delete[] allyPositions;
+		allyPositions = NULL;
+	}
+
 	LOG("Unloading Intro scene");
 	for (int i = 0; i < towers.Count(); i++)
 	{
