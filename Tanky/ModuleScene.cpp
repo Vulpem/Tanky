@@ -89,7 +89,7 @@ update_status ModuleScene::Update(float dt)
 
 	if (ended && timer.Read() > 4 * 1000)
 	{
-		if (allyNum > 0 && allyTowers == 0)
+		if (allyNum > 0 && allyTowers < allyNum)
 		{
 			reset = true; 
 		}
@@ -187,7 +187,7 @@ void ModuleScene::CheckTowersNumbers()
 
 	if (allyNum > 0)
 	{
-		if (allyTowers == 0)
+		if (allyTowers < allyNum)
 		{
 			if (!ended)
 			{
