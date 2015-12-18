@@ -7,6 +7,7 @@
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
+#include "ModuleScene.h"
 #include "ModuleScene1.h"
 #include "ModuleScene2.h"
 #include "ModuleRenderer3D.h"

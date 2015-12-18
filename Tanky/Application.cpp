@@ -30,6 +30,8 @@ Application::Application()
 
 	// Renderer last!
 	AddModule(renderer3D);
+
+	scene_1->SetNextScene((ModuleScene*)scene_2);
 }
 
 Application::~Application()

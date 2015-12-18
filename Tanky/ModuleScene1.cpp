@@ -1,121 +1,33 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleScene1.h"
+#include "ModuleScene.h"
 #include "Primitive.h"
 #include "PhysBody3D.h"
 
 
-ModuleScene1::ModuleScene1(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleScene1::ModuleScene1(Application* app, bool start_enabled) : ModuleScene(app, start_enabled)
 {
 }
 
-ModuleScene1::~ModuleScene1()
-{}
-
-// Load assets
-bool ModuleScene1::Start()
+void ModuleScene1::LoadPositions()
 {
-	LOG("Loading Intro assets");
-	bool ret = true;
-
-	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
-	App->camera->LookAt(vec3(0, 0, 0));
-
-	LoadTowers();
-	LOG("%i", allyTowers);
-	LOG("%i", enemyTowers);
-	return ret;
-}
-
-// Load assets
-bool ModuleScene1::CleanUp()
-{
-	if (neutralPositions)
-	{
-		delete[] neutralPositions;
-		neutralPositions = NULL;
-	}
-
-	if (enemyPositions)
-	{
-		delete[] enemyPositions;
-		enemyPositions = NULL;
-	}
-
-	if (allyPositions)
-	{
-		delete[] allyPositions;
-		allyPositions = NULL;
-	}
-
-	LOG("Unloading Intro scene");
-	for (int i = 0; i < towers.Count(); i++)
-	{
-		for (int j = 0; j < towers[i]->cubes.Count(); j++)
-		{
-			delete towers[i]->cubes[j];
-			App->physics->DeleteBody(towers[i]->pbs[j]);
-		}
-		towers[i]->cubes.Clear();
-	}
-	towers.Clear();
-	return true;
-}
-
-// Update
-update_status ModuleScene1::Update(float dt)
-{
-	for (int i = 0; i < towers.Count(); i++)
-	{
-		if (towers[i]->Update() == false)
-		{
-			if (towers[i]->type == TOWER_ALLY)
-			{
-				allyTowers--;
-				CheckTowersNumbers();
-			}
-
-			else if (towers[i]->type == TOWER_ENEMY)
-			{
-				enemyTowers--;
-				CheckTowersNumbers();
-			}
-
-		}
-	}
-	
-	Plane p(0, 0, 0, 1);
-	p.axis = true;
-	p.color = Color{ 1, 1, 1 , 1};
-	p.Render();
-	
-
-	return UPDATE_CONTINUE;
-}
-
-void ModuleScene1::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
-{
-
-}
-
-void ModuleScene1::LoadTowers()
-{
-	int neutralMax = 111;
-	neutralPositions = new vec4[neutralMax];
+	neutralNum = 111;
+	neutralPositions = new vec4[neutralNum];
 #pragma region NeutralPositions
 	//HALL
 	//Behind Wall
-	neutralPositions[0] = { 1, 1, 1, 2};
-	neutralPositions[1] = { 3, 1, 1, 2};
-	neutralPositions[2] = { 5, 1, 1, 2};
-	neutralPositions[3] = { 7, 1, 1, 2};
-	neutralPositions[4] = { 9, 1, 1, 2};
+	neutralPositions[0] = { 1, 1, 1, 2 };
+	neutralPositions[1] = { 3, 1, 1, 2 };
+	neutralPositions[2] = { 5, 1, 1, 2 };
+	neutralPositions[3] = { 7, 1, 1, 2 };
+	neutralPositions[4] = { 9, 1, 1, 2 };
 	neutralPositions[5] = { 11, 1, 1, 2 };
-	neutralPositions[6] = { -1, 1, 1, 2};
-	neutralPositions[7] = { -3, 1, 1, 2};
-	neutralPositions[8] = { -5, 1, 1, 2};
-	neutralPositions[9] = { -7, 1, 1, 2};
-	neutralPositions[10] = { -9, 1, 1, 2};
+	neutralPositions[6] = { -1, 1, 1, 2 };
+	neutralPositions[7] = { -3, 1, 1, 2 };
+	neutralPositions[8] = { -5, 1, 1, 2 };
+	neutralPositions[9] = { -7, 1, 1, 2 };
+	neutralPositions[10] = { -9, 1, 1, 2 };
 	neutralPositions[11] = { -11, 1, 1, 2 };
 
 	//Left Wall
@@ -238,8 +150,8 @@ void ModuleScene1::LoadTowers()
 
 #pragma endregion NeutralPositions
 
-	int enemyMax = 4;
-	enemyPositions = new vec4[enemyMax];
+	enemyNum = 4;
+	enemyPositions = new vec4[enemyNum];
 #pragma region EnemyPositions
 
 	enemyPositions[0] = { 9, 0, 67, 5 };
@@ -250,69 +162,4 @@ void ModuleScene1::LoadTowers()
 
 
 #pragma endregion EnemyPositions
-	/*
-	//Allies
-	for (int i = 0; i < 0; i++)
-	{
-		Tower* tower = new Tower((int)allyPositions[i].x, (int)allyPositions[i].y, (int)allyPositions[i].z, TOWER_ALLY, allyPositions[i].w);
-		for (int i = 0; i < tower->cubes.Count(); i++)
-		{
-			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
-			tower->pbs[i]->SetInactive();
-		}
-		towers.PushBack(tower);
-		allyTowers++;
-	}
-	*/
-	//Enemies
-	
-	for (int i = 0; i < enemyMax; i++)
-	{
-		Tower* tower = new Tower((int)enemyPositions[i].x, (int)enemyPositions[i].y, (int)enemyPositions[i].z, TOWER_ENEMY, enemyPositions[i].w);
-		for (int i = 0; i < tower->cubes.Count(); i++)
-		{
-			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
-			tower->pbs[i]->SetInactive();
-		}
-		towers.PushBack(tower);
-		enemyTowers++;
-	}
-	
-	delete[]enemyPositions;
-	enemyPositions = NULL;
-
-	//Neutrals
-
-	for (int i = 0; i < neutralMax; i++)
-	{
-		Tower* tower = new Tower((int)neutralPositions[i].x, (int)neutralPositions[i].y, (int)neutralPositions[i].z, TOWER_NEUTRAL, neutralPositions[i].w);
-		for (int i = 0; i < tower->cubes.Count(); i++)
-		{
-			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i], 0.0f));
-			tower->pbs[i]->SetInactive();
-		}
-		towers.PushBack(tower);
-	}
-
-	delete[]neutralPositions;
-	neutralPositions = NULL;
 }
-
-void ModuleScene1::CheckTowersNumbers()
-{
-	/*
-	if (allyTowers == 0)
-	{
-		LOG("YOU LOOSE");
-	}
-	else */if (enemyTowers == 0)
-	{
-		App->camera->Disable();
-		App->player->Disable();
-		App->scene_1->Disable();
-		App->scene_2->Enable();
-		App->player->Enable();
-		App->camera->Enable();
-	}
-}
-

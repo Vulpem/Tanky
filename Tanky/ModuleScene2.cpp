@@ -5,102 +5,14 @@
 #include "PhysBody3D.h"
 
 
-ModuleScene2::ModuleScene2(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleScene2::ModuleScene2(Application* app, bool start_enabled) : ModuleScene(app, start_enabled)
 {
 }
 
-ModuleScene2::~ModuleScene2()
-{}
-
-// Load assets
-bool ModuleScene2::Start()
+void ModuleScene2::LoadPositions()
 {
-	LOG("Loading Intro assets");
-	bool ret = true;
-
-	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
-	App->camera->LookAt(vec3(0, 0, 0));
-
-	LoadTowers();
-	LOG("%i", allyTowers);
-	LOG("%i", enemyTowers);
-	return ret;
-}
-
-// Load assets
-bool ModuleScene2::CleanUp()
-{
-	LOG("Unloading Intro scene");
-	if (neutralPositions)
-	{
-		delete[] neutralPositions;
-		neutralPositions = NULL;
-	}
-
-	if (enemyPositions)
-	{
-		delete[] enemyPositions;
-		enemyPositions = NULL;
-	}
-
-	if (allyPositions)
-	{
-		delete[] allyPositions;
-		allyPositions = NULL;
-	}LOG("Unloading Intro scene");
-	for (int i = 0; i < towers.Count(); i++)
-	{
-		for (int j = 0; j < towers[i]->cubes.Count(); j++)
-		{
-			delete towers[i]->cubes[j];
-			App->physics->DeleteBody(towers[i]->pbs[j]);
-		}
-		towers[i]->cubes.Clear();
-	}
-	towers.Clear();
-	return true;
-}
-
-// Update
-update_status ModuleScene2::Update(float dt)
-{
-	for (int i = 0; i < towers.Count(); i++)
-	{
-		if (towers[i]->Update() == false)
-		{
-			if (towers[i]->type == TOWER_ALLY)
-			{
-				allyTowers--;
-				CheckTowersNumbers();
-			}
-
-			else if (towers[i]->type == TOWER_ENEMY)
-			{
-				enemyTowers--;
-				CheckTowersNumbers();
-			}
-
-		}
-	}
-
-	Plane p(0, 0, 0, 1);
-	p.axis = true;
-	p.color = Color{ 1, 1, 1, 1 };
-	p.Render();
-
-
-	return UPDATE_CONTINUE;
-}
-
-void ModuleScene2::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
-{
-
-}
-
-void ModuleScene2::LoadTowers()
-{
-	int neutralMax = 111;
-	neutralPositions = new vec4[neutralMax];
+	neutralNum = 111;
+	neutralPositions = new vec4[neutralNum];
 #pragma region NeutralPositions
 	//HALL
 	//Behind Wall
@@ -238,8 +150,8 @@ void ModuleScene2::LoadTowers()
 
 #pragma endregion NeutralPositions
 
-	int enemyMax = 4;
-	enemyPositions = new vec4[enemyMax];
+	enemyNum = 4;
+	enemyPositions = new vec4[enemyNum];
 #pragma region EnemyPositions
 
 	enemyPositions[0] = { 9, 0, 67, 5 };
@@ -248,72 +160,8 @@ void ModuleScene2::LoadTowers()
 
 #pragma endregion EnemyPositions
 	
-	int alliesMax = 1;
-	allyPositions = new vec4[alliesMax];
+	allyNum = 1;
+	allyPositions = new vec4[allyNum];
 	allyPositions[0] = { -3, 0, 67, 5 };
-	//Allies
-	for (int i = 0; i < alliesMax; i++)
-	{
-	Tower* tower = new Tower((int)allyPositions[i].x, (int)allyPositions[i].y, (int)allyPositions[i].z, TOWER_ALLY, allyPositions[i].w);
-	for (int i = 0; i < tower->cubes.Count(); i++)
-	{
-	tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
-	tower->pbs[i]->SetInactive();
-	}
-	towers.PushBack(tower);
-	allyTowers++;
-	}
-	if (allyPositions)
-	{
-		delete[] allyPositions;
-		allyPositions = NULL;
-	}
-	//Enemies
-
-	for (int i = 0; i < enemyMax; i++)
-	{
-		Tower* tower = new Tower((int)enemyPositions[i].x, (int)enemyPositions[i].y, (int)enemyPositions[i].z, TOWER_ENEMY, enemyPositions[i].w);
-		for (int i = 0; i < tower->cubes.Count(); i++)
-		{
-			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i]));
-			tower->pbs[i]->SetInactive();
-		}
-		towers.PushBack(tower);
-		enemyTowers++;
-	}
-
-	delete[]enemyPositions;
-	enemyPositions = NULL;
-	//Neutrals
-
-	for (int i = 0; i < neutralMax; i++)
-	{
-		Tower* tower = new Tower((int)neutralPositions[i].x, (int)neutralPositions[i].y, (int)neutralPositions[i].z, TOWER_NEUTRAL, neutralPositions[i].w);
-		for (int i = 0; i < tower->cubes.Count(); i++)
-		{
-			tower->pbs.PushBack(App->physics->AddBody(*tower->cubes[i], 0.0f));
-			tower->pbs[i]->SetInactive();
-		}
-		towers.PushBack(tower);
-	}
-
-	delete[]neutralPositions;
-	neutralPositions = NULL;
-}
-
-void ModuleScene2::CheckTowersNumbers()
-{
-	LOG("Enemy towers: %i", enemyTowers);
-	
-	LOG("Ally towers: %i", allyTowers);
-
-	if (allyTowers == 0)
-	{
-	LOG("YOU LOOSE");
-	}
-	else if (enemyTowers == 0)
-	{
-		LOG("YOU WIN!");
-	}
 }
 

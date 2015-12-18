@@ -54,7 +54,6 @@ update_status ModuleCamera3D::Update(float dt)
 	
 	if (distanceToVehicle != maxDistanceToVehicle)
 	{
-		LOG("Vehicle out of distance");
 		btVector3FloatData data;
 		distanceVec.serializeFloat(data);
 		float angle = atan2(data.m_floats[0], data.m_floats[2]);
