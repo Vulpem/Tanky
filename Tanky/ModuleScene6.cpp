@@ -150,17 +150,21 @@ void ModuleScene6::LoadPositions()
 
 #pragma endregion NeutralPositions
 
-	enemyNum = 3;
+	enemyNum = 1;
 	enemyPositions = new vec4[enemyNum];
 #pragma region EnemyPositions
 
-	enemyPositions[0] = { 9, 0, 67, 5 };
-	enemyPositions[1] = { 3, 0, 67, 5 };
-	enemyPositions[2] = { -9, 0, 67, 5 };
+	enemyPositions[0] = { 9, 0, 67, 1 };
+
 
 #pragma endregion EnemyPositions
 
-	allyNum = 1;
+	allyNum = 6;
 	allyPositions = new vec4[allyNum];
-	allyPositions[0] = { -3, 0, 67, 5 };
+	allyPositions[0] = { 3, 0, 33, 5 };
+	allyPositions[1] = { -3, 0, 33, 5 };
+	allyPositions[2] = { 3, 0, 37, 5 };
+	allyPositions[3] = { -3, 0, 37, 5 };
+	allyPositions[4] = { 3, 0, 41, 5 };
+	allyPositions[5] = { -3, 0, 41, 5 };
 }
